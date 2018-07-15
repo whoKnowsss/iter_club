@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.iter_club.portal.dao.UsertocouMapper" >
+    <resultMap id="BaseResultMap" type="com.iter_club.portal.entity.Usertocou" >
+        <id column="ID" property="ID" jdbcType="INTEGER" />
+        <result column="UUID" property="UUID" jdbcType="VARCHAR" />
+        <association property="userforum" column="UserId" select="getUser"/>
+        <association property="course" column="CourseId" select="getCourse"/>
+    </resultMap>
+
+    <resultMap id="Course" type="com.iter_club.portal.entity.Course">
+        <id column="ID" property="ID" jdbcType="INTEGER"/>
+        <result column="UUID" property="UUID" jdbcType="INTEGER"/>
+        <result column="Name" property="Name" jdbcType="VARCHAR" />
+        <result column="Img" property="img" jdbcType="VARCHAR" />
+        <result column="Description" property="description" jdbcType="VARCHAR"/>
+        <result column="Status" property="status" jdbcType="INTEGER"/>
+        <result column="CreatedAt" property="createdAt" jdbcType="TIMESTAMP"/>
+        <result column="UpdatedAt" property="updatedAt" jdbcType="TIMESTAMP"/>
+        <association property="teacher" column="TeacherId" select="getTeacher"/>
+        <association property="school" column="SchoolId" select="getSchool"/>
+        <association property="category" column="CategoryId" select="getCategory"/>
+    </resultMap>
+
+    <resultMap id="Category" type="com.iter_club.portal.entity.Category">
+        <id column="ID" property="ID" jdbcType="INTEGER"/>
+        <result column="UUID" property="UUID" jdbcType="INTEGER"/>
+        <result column="Name" property="name" jdbcType="VARCHAR"/>
+        <result column="Description" property="description" jdbcType="VARCHAR"/>
+        <result column="CreatedAt" property="createdAt" jdbcType="TIMESTAMP"/>
+        <result column="UpdatedAt" property="updatedAt" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <sql id="Category_Column_List">
+        ID, UUID, Name, Description, CreatedAt, UpdatedAt
+    </sql>
+    <select id="getCategory" resultMap="Category" parameterType="java.lang.Integer">
+        select
+        <include refid="Category_Column_List"/>
+        from category
+        where ID = #{ID,jdbcType=INTEGER}
+    </select>
+
+    <resultMap id="School" type="com.iter_club.portal.entity.School">
+        <id column="ID" property="ID" jdbcType="INTEGER"/>
+        <result column="UUID" property="UUID" jdbcType="INTEGER"/>
+        <result column="Name" property="name" jdbcType="VARCHAR"/>
+        <result column="Description" property="description" jdbcType="VARCHAR"/>
+        <result column="CreatedAt" property="createdAt" jdbcType="TIMESTAMP"/>
+        <result column="UpdatedAt" property="updatedAt" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <sql id="School_Column_List">
+        ID, UUID, Name, Description, CreatedAt, UpdatedAt
+    </sql>
+    <select id="getSchool" resultMap="School" parameterType="java.lang.Integer">
+        select
+        <include refid="School_Column_List"/>
+        from school
+        where ID = #{ID,jdbcType=INTEGER}
+    </select>
+
+    <resultMap id="Teacher" type="com.iter_club.portal.entity.Teacher">
+        <id column="ID" property="ID" jdbcType="INTEGER"/>
+        <result column="UUID" property="UUID" jdbcType="INTEGER"/>
+        <result column="Name" property="name" jdbcType="VARCHAR"/>
+        <result column="Photo" property="photo" jdbcType="VARCHAR"/>
+        <result column="Description" property="description" jdbcType="VARCHAR"/>
+        <result column="CreatedAt" property="createdAt" jdbcType="TIMESTAMP"/>
+        <result column="UpdatedAt" property="updatedAt" jdbcType="TIMESTAMP"/>
+        <association column="SchoolId" property="school"  select="getSchool"/>
+    </resultMap>
+    <sql id="Teacher_Column_List">
+        ID, UUID, SchoolId, Name, Photo, Description, CreatedAt, UpdatedAt
+    </sql>
+    <select id="getTeacher" resultMap="Teacher" parameterType="java.lang.Integer">
+        select
+        <include refid="Teacher_Column_List"/>
+        from teacher
+        where ID = #{ID,jdbcType=INTEGER}
+    </select>
+
+
+    <select id="getCourse" resultMap="Course" parameterType="java.lang.Integer">
+        select  *   from course
+        where ID = #{ID,jdbcType=INTEGER}
+    </select>
+
+    <resultMap id="User" type="com.iter_club.portal.entity.User" >
+        <id column="ID" property="ID" jdbcType="INTEGER" />
+        <result column="UUID" property="UUID" jdbcType="VARCHAR" />
+        <result column="Name" property="name" jdbcType="VARCHAR" />
+        <result column="Gender" property="gender" jdbcType="VARCHAR" />
+        <result column="Mobile" property="mobile" jdbcType="VARCHAR" />
+        <result column="Email" property="email" jdbcType="VARCHAR" />
+        <result column="Password" property="password" jdbcType="VARCHAR" />
+        <result column="Photo" property="photo" jdbcType="VARCHAR" />
+        <result column="CreatedAt" property="createdAt" jdbcType="TIMESTAMP" />
+        <result column="UpdatedAt" property="updatedAt" jdbcType="TIMESTAMP" />
+    </resultMap>
+
+    <select id="getUser" resultMap="User" parameterType="java.lang.Integer" >
+        select  *  from userforum
+        where ID = #{ID,jdbcType=INTEGER}
+    </select>
+
+
+    <select id="selectByUserID" resultMap="Course" parameterType="java.lang.Integer" >
+        select  *  from usertocou, course
+        where  course.ID = usertocou.CourseId and usertocou.UserId = #{UserID,jdbcType=INTEGER}
+    </select>
+
+    <select id="selectByUserStatus" resultMap="Course" parameterType="java.lang.Integer" >
+        select  course.ID as ID ,course.Name as Name,course.img as img,course.Description as Description ,course.Status AS status ,
+        course.CreatedAt AS CreatedAt,course.UpdatedAt as  UpdatedAt,course.TeacherId as TeacherId,course.CategoryId as CategoryId
+        FROM usertocou, course ,userforum
+        where  course.ID = usertocou.CourseID and usertocou.UserID = userforum.ID
+        and usertocou.UserID=${UserId}
+        <if test="Status != -1">
+            and  course.Status = #{Status,jdbcType=INTEGER}
+        </if>
+    </select>
+
+
+    <select id="sellectByuidAndcid" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select  *  from usertocou
+        where  UserID = ${UserId} and CourseId = ${CourseId}
+     </select>
+    <insert id="insert"  parameterType="com.iter_club.portal.entity.Usertocou" >
+        insert into usertocou ( UserId, CourseId)
+        values (#{UserId,jdbcType=INTEGER},#{CourseId,jdbcType=INTEGER})
+    </insert>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+        delete from usertocou
+        where ID = #{ID,jdbcType=INTEGER}
+    </delete>
+
+    <!--<insert id="insert"  parameterType="Usertocou" >-->
+    <!--insert into usertocou (ID, UUID, UserId, CourseId)-->
+    <!--values (#{ID,jdbcType=INTEGER}, #{UUID,jdbcType=VARCHAR},#{UserId,jdbcType=INTEGER},#{CourseId,jdbcType=INTEGER})-->
+    <!--</insert>-->
+
+    <!--<insert id="insertSelective" parameterType="Usertocou">-->
+    <!--insert into usertocou-->
+    <!--<trim prefix="(" suffix=")" suffixOverrides=",">-->
+    <!--<if test="ID != null">-->
+        <!--ID,-->
+    <!--</if>-->
+    <!--<if test="UUID != null">-->
+        <!--UUID,-->
+    <!--</if>-->
+    <!--<if test="userforum != null">-->
+        <!--UserId-->
+    <!--</if>-->
+    <!--<if test="course != null">-->
+        <!--CourseId,-->
+    <!--</if>-->
+    <!--</trim>-->
+    <!--<trim prefix="values (" suffix=")" suffixOverrides=",">-->
+    <!--<if test="ID != null">-->
+        <!--#{ID,jdbcType=INTEGER},-->
+    <!--</if>-->
+    <!--<if test="UUID != null">-->
+        <!--#{UUID,jdbcType=VARCHAR},-->
+    <!--</if>-->
+    <!--<if test="userforum != null">-->
+         <!--#{userforum,jdbcType=OTHER},-->
+    <!--</if>-->
+    <!--<if test="course != null">-->
+        <!--#{course,jdbcType=OTHER},-->
+    <!--</if>-->
+    <!--</trim>-->
+    <!--</insert>-->
+
+
+
+
+
+</mapper>

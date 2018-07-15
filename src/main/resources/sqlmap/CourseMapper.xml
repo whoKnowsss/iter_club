@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.iter_club.portal.dao.CourseMapper">
+
+    <resultMap id="BaseResultMap" type="com.iter_club.portal.entity.Course">
+        <id column="ID" property="ID" jdbcType="INTEGER"/>
+        <result column="UUID" property="UUID" jdbcType="INTEGER"/>
+        <result column="Name" property="Name" jdbcType="VARCHAR" />
+        <result column="Img" property="img" jdbcType="VARCHAR" />
+        <result column="Description" property="description" jdbcType="VARCHAR"/>
+        <result column="Status" property="status" jdbcType="INTEGER"/>
+        <result column="CreatedAt" property="createdAt" jdbcType="TIMESTAMP"/>
+        <result column="UpdatedAt" property="updatedAt" jdbcType="TIMESTAMP"/>
+        <!--<result column="TeacherId" property="teacherId" jdbcType="INTEGER"/>-->
+        <!--<result column="SchoolId" property="schoolId" jdbcType="INTEGER"/>-->
+        <association property="teacher" column="TeacherId" select="getTeacher"/>
+        <association property="school" column="SchoolId" select="getSchool"/>
+        <!--<result column="CategoryId" property="categoryId" jdbcType="INTEGER"/>-->
+        <association property="category" column="CategoryId" select="getCategory"/>
+    </resultMap>
+
+    <resultMap id="Category" type="com.iter_club.portal.entity.Category">
+        <id column="ID" property="ID" jdbcType="INTEGER"/>
+        <result column="UUID" property="UUID" jdbcType="INTEGER"/>
+        <result column="Name" property="name" jdbcType="VARCHAR"/>
+        <result column="Description" property="description" jdbcType="VARCHAR"/>
+        <result column="CreatedAt" property="createdAt" jdbcType="TIMESTAMP"/>
+        <result column="UpdatedAt" property="updatedAt" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <sql id="Category_Column_List">
+        ID, UUID, Name, Description, CreatedAt, UpdatedAt
+    </sql>
+    <select id="getCategory" resultMap="Category" parameterType="java.lang.Integer">
+        select
+        <include refid="Category_Column_List"/>
+        from category
+        where ID = #{ID,jdbcType=INTEGER}
+    </select>
+
+    <resultMap id="School" type="com.iter_club.portal.entity.School">
+        <id column="ID" property="ID" jdbcType="INTEGER"/>
+        <result column="UUID" property="UUID" jdbcType="INTEGER"/>
+        <result column="Name" property="name" jdbcType="VARCHAR"/>
+        <result column="Description" property="description" jdbcType="VARCHAR"/>
+        <result column="CreatedAt" property="createdAt" jdbcType="TIMESTAMP"/>
+        <result column="UpdatedAt" property="updatedAt" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <sql id="School_Column_List">
+        ID, UUID, Name, Description, CreatedAt, UpdatedAt
+    </sql>
+    <select id="getSchool" resultMap="School" parameterType="java.lang.Integer">
+        select
+        <include refid="School_Column_List"/>
+        from school
+        where ID = #{ID,jdbcType=INTEGER}
+    </select>
+
+    <resultMap id="Teacher" type="com.iter_club.portal.entity.Teacher">
+        <id column="ID" property="ID" jdbcType="INTEGER"/>
+        <result column="UUID" property="UUID" jdbcType="INTEGER"/>
+        <!--<result column="SchoolId" property="school" jdbcType="INTEGER"/>-->
+        <result column="Name" property="name" jdbcType="VARCHAR"/>
+        <result column="Photo" property="photo" jdbcType="VARCHAR"/>
+        <result column="Description" property="description" jdbcType="VARCHAR"/>
+        <result column="CreatedAt" property="createdAt" jdbcType="TIMESTAMP"/>
+        <result column="UpdatedAt" property="updatedAt" jdbcType="TIMESTAMP"/>
+        <association column="SchoolId" property="school"  select="getSchool"/>
+    </resultMap>
+    <sql id="Teacher_Column_List">
+        ID, UUID, SchoolId, Name, Photo, Description, CreatedAt, UpdatedAt
+    </sql>
+    <select id="getTeacher" resultMap="Teacher" parameterType="java.lang.Integer">
+        select
+        <include refid="Teacher_Column_List"/>
+        from teacher
+        where ID = #{ID,jdbcType=INTEGER}
+    </select>
+
+
+
+
+    <select id="selectAll" resultMap="BaseResultMap">
+        select * from course
+    </select>
+
+    <sql id="Base_Column_List">
+    ID, UUID, Name, TeacherId, SchoolId, Description, CategoryId, Status, Img, CreatedAt, UpdatedAt
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from course
+        where ID = #{ID,jdbcType=INTEGER}
+    </select>
+
+
+
+    <select id="selectSelective" resultMap="BaseResultMap" parameterType="com.iter_club.portal.entity.Course" >
+        select
+        <include refid="Base_Column_List" />
+        from course
+        <where>
+            <if test="ID != null" >
+                ID = #{ID,jdbcType=INTEGER}
+            </if>
+            <if test="UUID != null" >
+                AND UUID = #{UUID,jdbcType=INTEGER}
+            </if>
+            <if test="status != null" >
+                AND Status = #{status,jdbcType=INTEGER}
+            </if>
+            <if test="createdAt != null" >
+                AND CreatedAt = #{createdAt,jdbcType=TIMESTAMP}
+            </if>
+            <if test="updatedAt != null" >
+                AND UpdatedAt = #{updatedAt,jdbcType=TIMESTAMP}
+            </if>
+            <if test="category.ID != null" >
+                AND CategoryId = #{category.ID,jdbcType=INTEGER}
+            </if>
+
+
+        </where>
+    </select>
+
+
+
+    <select id="selectByCategoryId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select * from course
+        where CategoryId = #{CategoryId,jdbcType=INTEGER}
+    </select>
+
+    <select id="selectByStatus" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select * from course
+        where Status = #{status,jdbcType=INTEGER}
+    </select>
+
+    <select id="selectByName" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select * from course
+        where Name =  #{name,jdbcType=VARCHAR}
+    </select>
+
+    <select id="search" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select * from course
+        where Name LIKE '%${_parameter}%'
+    </select>
+
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from course
+    where ID = #{ID,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.iter_club.portal.entity.Course">
+    insert into course (ID, UUID, Name,TeacherId,
+      SchoolId, Description, CategoryId,
+      Status, Img, CreatedAt, UpdatedAt
+      )
+    values (#{ID,jdbcType=INTEGER}, #{UUID,jdbcType=VARCHAR}, #{Name,jdbcType=VARCHAR}, #{teacherId,jdbcType=INTEGER},
+      #{schoolId,jdbcType=INTEGER}, #{description,jdbcType=VARCHAR}, #{categoryId,jdbcType=INTEGER}, 
+      #{status,jdbcType=INTEGER}, #{img,jdbcType=VARCHAR}, #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.iter_club.portal.entity.Course">
+        insert into course
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="ID != null">
+                ID,
+            </if>
+            <if test="UUID != null">
+                UUID,
+            </if>
+            <if test="Name != null">
+                Name,
+            </if>
+            <if test="teacherId != null">
+                TeacherId,
+            </if>
+            <if test="schoolId != null">
+                SchoolId,
+            </if>
+            <if test="description != null">
+                Description,
+            </if>
+            <if test="categoryId != null">
+                CategoryId,
+            </if>
+            <if test="status != null">
+                Status,
+            </if>
+            <if test="img!= null">
+                Img,
+            </if>
+            <if test="createdAt != null">
+                CreatedAt,
+            </if>
+            <if test="updatedAt != null">
+                UpdatedAt,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="ID != null">
+                #{ID,jdbcType=INTEGER},
+            </if>
+            <if test="UUID != null">
+                #{UUID,jdbcType=VARCHAR},
+            </if>
+            <if test="Name != null">
+                Name,
+            </if>
+            <if test="teacherId != null">
+                #{teacherId,jdbcType=INTEGER},
+            </if>
+            <if test="schoolId != null">
+                #{schoolId,jdbcType=INTEGER},
+            </if>
+            <if test="description != null">
+                #{description,jdbcType=VARCHAR},
+            </if>
+            <if test="categoryId != null">
+                #{categoryId,jdbcType=INTEGER},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="img != null">
+                #{img,jdbcType=VARCHAR},
+            </if>
+            <if test="createdAt != null">
+                #{createdAt,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updatedAt != null">
+                #{updatedAt,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.iter_club.portal.entity.Course">
+        update course
+        <set>
+            <if test="UUID != null">
+                UUID = #{UUID,jdbcType=VARCHAR},
+            </if>
+            <if test="Name != null">
+                Name = #{Name,jdbcType=VARCHAR},
+            </if>
+            <if test="teacherId != null">
+                TeacherId = #{teacherId,jdbcType=INTEGER},
+            </if>
+            <if test="schoolId != null">
+                SchoolId = #{schoolId,jdbcType=INTEGER},
+            </if>
+            <if test="description != null">
+                Description = #{description,jdbcType=VARCHAR},
+            </if>
+            <if test="categoryId != null">
+                CategoryId = #{categoryId,jdbcType=INTEGER},
+            </if>
+            <if test="status != null">
+                Status = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="img != null">
+                Img = #{img,jdbcType=VARCHAR},
+            </if>
+            <if test="createdAt != null">
+                CreatedAt = #{createdAt,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updatedAt != null">
+                UpdatedAt = #{updatedAt,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where ID = #{ID,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.iter_club.portal.entity.Course">
+    update course
+    set UUID = #{UUID,jdbcType=VARCHAR},
+      Name = #{Name,jdbcType=VARCHAR},
+      TeacherId = #{teacherId,jdbcType=INTEGER},
+      SchoolId = #{schoolId,jdbcType=INTEGER},
+      Description = #{description,jdbcType=VARCHAR},
+      CategoryId = #{categoryId,jdbcType=INTEGER},
+      Status = #{status,jdbcType=INTEGER},
+      Img = #{img,jdbcType=VARCHAR},
+      CreatedAt = #{createdAt,jdbcType=TIMESTAMP},
+      UpdatedAt = #{updatedAt,jdbcType=TIMESTAMP}
+    where ID = #{ID,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.iter_club.portal.dao.AdminMapper" >
+  <resultMap id="BaseResultMap" type="com.iter_club.portal.entity.Admin" >
+    <id column="ID" property="ID" jdbcType="INTEGER" />
+    <result column="UUID" property="UUID" jdbcType="VARCHAR" />
+    <result column="WorkNumber" property="workNumber" jdbcType="INTEGER" />
+    <result column="Name" property="name" jdbcType="VARCHAR" />
+    <result column="Gender" property="gender" jdbcType="VARCHAR" />
+    <result column="Mobile" property="mobile" jdbcType="VARCHAR" />
+    <result column="Email" property="email" jdbcType="VARCHAR" />
+    <result column="Password" property="password" jdbcType="VARCHAR" />
+    <result column="Photo" property="photo" jdbcType="VARCHAR" />
+    <result column="CreatedAt" property="createdAt" jdbcType="TIMESTAMP" />
+    <result column="UpdatedAt" property="updatedAt" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, UUID, WorkNumber, Name, Gender, Mobile, Email, Password, Photo, CreatedAt, UpdatedAt
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from admin
+    where ID = #{ID,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from admin
+    where ID = #{ID,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.iter_club.portal.entity.Admin" >
+    insert into admin (ID, UUID, WorkNumber, 
+      Name, Gender, Mobile, 
+      Email, Password, Photo, 
+      CreatedAt, UpdatedAt)
+    values (#{ID,jdbcType=INTEGER}, #{UUID,jdbcType=VARCHAR}, #{workNumber,jdbcType=INTEGER},
+      #{name,jdbcType=VARCHAR}, #{gender,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR},
+      #{email,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{photo,jdbcType=VARCHAR}, 
+      #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.iter_club.portal.entity.Admin" >
+    insert into admin
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ID != null" >
+        ID,
+      </if>
+      <if test="UUID != null" >
+        UUID,
+      </if>
+      <if test="workNumber != null" >
+        WorkNumber,
+      </if>
+      <if test="name != null" >
+        Name,
+      </if>
+      <if test="gender != null" >
+        Gender,
+      </if>
+      <if test="mobile != null" >
+        Mobile,
+      </if>
+      <if test="email != null" >
+        Email,
+      </if>
+      <if test="password != null" >
+        Password,
+      </if>
+      <if test="photo != null" >
+        Photo,
+      </if>
+      <if test="createdAt != null" >
+        CreatedAt,
+      </if>
+      <if test="updatedAt != null" >
+        UpdatedAt,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ID != null" >
+        #{ID,jdbcType=INTEGER},
+      </if>
+      <if test="UUID != null" >
+        #{UUID,jdbcType=VARCHAR},
+      </if>
+      <if test="workNumber != null" >
+        #{workNumber,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null" >
+        #{gender,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="photo != null" >
+        #{photo,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null" >
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null" >
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.iter_club.portal.entity.Admin" >
+    update admin
+    <set >
+      <if test="UUID != null" >
+        UUID = #{UUID,jdbcType=VARCHAR},
+      </if>
+      <if test="workNumber != null" >
+        WorkNumber = #{workNumber,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        Name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null" >
+        Gender = #{gender,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        Mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        Email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        Password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="photo != null" >
+        Photo = #{photo,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null" >
+        CreatedAt = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null" >
+        UpdatedAt = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{ID,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.iter_club.portal.entity.Admin" >
+    update admin
+    set UUID = #{UUID,jdbcType=VARCHAR},
+      WorkNumber = #{workNumber,jdbcType=INTEGER},
+      Name = #{name,jdbcType=VARCHAR},
+      Gender = #{gender,jdbcType=VARCHAR},
+      Mobile = #{mobile,jdbcType=VARCHAR},
+      Email = #{email,jdbcType=VARCHAR},
+      Password = #{password,jdbcType=VARCHAR},
+      Photo = #{photo,jdbcType=VARCHAR},
+      CreatedAt = #{createdAt,jdbcType=TIMESTAMP},
+      UpdatedAt = #{updatedAt,jdbcType=TIMESTAMP}
+    where ID = #{ID,jdbcType=INTEGER}
+  </update>
+</mapper>

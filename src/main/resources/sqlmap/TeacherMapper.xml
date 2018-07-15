@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.iter_club.portal.dao.TeacherMapper" >
+  <resultMap id="BaseResultMap" type="com.iter_club.portal.entity.Teacher" >
+    <id column="ID" property="ID" jdbcType="INTEGER" />
+    <result column="UUID" property="UUID" jdbcType="VARCHAR" />
+    <result column="Name" property="name" jdbcType="VARCHAR" />
+    <result column="Photo" property="photo" jdbcType="VARCHAR" />
+    <result column="Description" property="description" jdbcType="VARCHAR" />
+    <result column="CreatedAt" property="createdAt" jdbcType="TIMESTAMP" />
+    <result column="UpdatedAt" property="updatedAt" jdbcType="TIMESTAMP" />
+    <association column="SchoolId" property="school"  select="getSchool"/>
+  </resultMap>
+
+  <resultMap id="School" type="com.iter_club.portal.entity.School">
+    <id column="ID" property="ID" jdbcType="INTEGER"/>
+    <result column="UUID" property="UUID" jdbcType="INTEGER"/>
+    <result column="Name" property="name" jdbcType="VARCHAR"/>
+    <result column="Description" property="description" jdbcType="VARCHAR"/>
+    <result column="CreatedAt" property="createdAt" jdbcType="TIMESTAMP"/>
+    <result column="UpdatedAt" property="updatedAt" jdbcType="TIMESTAMP"/>
+  </resultMap>
+  <sql id="School_Column_List">
+    ID, UUID, Name, Description, CreatedAt, UpdatedAt
+  </sql>
+  <select id="getSchool" resultMap="School" parameterType="java.lang.Integer">
+    select
+    <include refid="School_Column_List"/>
+    from school
+    where ID = #{ID,jdbcType=INTEGER}
+  </select>
+
+  <sql id="Base_Column_List" >
+    ID, UUID, SchoolId, Name, Photo, Description, CreatedAt, UpdatedAt
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from teacher
+    where ID = #{ID,jdbcType=INTEGER}
+  </select>
+
+
+
+
+
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from teacher
+    where ID = #{ID,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.iter_club.portal.entity.Teacher" >
+    insert into teacher (ID, UUID, SchoolId, 
+      Name, Photo, Description, 
+      CreatedAt, UpdatedAt)
+    values (#{ID,jdbcType=INTEGER}, #{UUID,jdbcType=VARCHAR}, #{schoolId,jdbcType=INTEGER},
+      #{name,jdbcType=VARCHAR}, #{photo,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
+      #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.iter_club.portal.entity.Teacher" >
+    insert into teacher
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ID != null" >
+        ID,
+      </if>
+      <if test="UUID != null" >
+        UUID,
+      </if>
+      <if test="schoolId != null" >
+        SchoolId,
+      </if>
+      <if test="name != null" >
+        Name,
+      </if>
+      <if test="photo != null" >
+        Photo,
+      </if>
+      <if test="description != null" >
+        Description,
+      </if>
+      <if test="createdAt != null" >
+        CreatedAt,
+      </if>
+      <if test="updatedAt != null" >
+        UpdatedAt,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ID != null" >
+        #{ID,jdbcType=INTEGER},
+      </if>
+      <if test="UUID != null" >
+        #{UUID,jdbcType=VARCHAR},
+      </if>
+      <if test="schoolId != null" >
+        #{schoolId,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="photo != null" >
+        #{photo,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null" >
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null" >
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.iter_club.portal.entity.Teacher" >
+    update teacher
+    <set >
+      <if test="UUID != null" >
+        UUID = #{UUID,jdbcType=VARCHAR},
+      </if>
+      <if test="schoolId != null" >
+        SchoolId = #{schoolId,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        Name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="photo != null" >
+        Photo = #{photo,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        Description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null" >
+        CreatedAt = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null" >
+        UpdatedAt = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{ID,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.iter_club.portal.entity.Teacher" >
+    update teacher
+    set UUID = #{UUID,jdbcType=VARCHAR},
+      SchoolId = #{schoolId,jdbcType=INTEGER},
+      Name = #{name,jdbcType=VARCHAR},
+      Photo = #{photo,jdbcType=VARCHAR},
+      Description = #{description,jdbcType=VARCHAR},
+      CreatedAt = #{createdAt,jdbcType=TIMESTAMP},
+      UpdatedAt = #{updatedAt,jdbcType=TIMESTAMP}
+    where ID = #{ID,jdbcType=INTEGER}
+  </update>
+</mapper>

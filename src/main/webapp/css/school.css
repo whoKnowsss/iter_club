@@ -1,0 +1,218 @@
+.container .sc-bg{
+	position: relative;
+	background: #000 url("../image/school/SC-02-bg.jpg") no-repeat;
+	background-size: 1270px 200px;
+	background-position: center;
+	height: 200px;
+	min-width: 1346px;
+}
+.sc-bg .bg-shadow{
+	position: absolute;
+	width: 1274px;
+	height: 200px;
+	left: 38px;
+	box-shadow:inset 50px 0 120px -20px #000000,inset 50px 0 120px -40px #000000, inset -50px 0 120px -20px #000000, inset -50px 0 120px -40px #000000, inset 0 10px 10px -10px #000000, inset 0 -10px 10px -10px #000000;
+}
+.course-list{
+	min-width: 1346px;
+	background-color: #eee; 
+}
+
+.course-list .sc-info-box .sc-img{
+	position: absolute;
+	top: 180px;
+	left: 130px;
+	width: 145px;
+	height: 145px;
+	border-radius: 75px;
+	border: 5px solid #fff;
+	background-color: #fff;
+}
+.course-list .sc-info-box .sc-img img{
+	width: 145px;
+	height: 145px;
+}
+.course-list .sc-info-box .sc-info{
+	padding-left: 320px;
+	padding-top: 20px;
+	padding-right: 128px;
+}
+.course-list .sc-info-box .sc-info .sc-name{
+	font-weight: normal;
+	font-family: "Arial","Hiragino Sans GB","Microsoft YaHei", "微软雅黑", "Helvetica", "sans-serif";
+	line-height: 1.5;
+	font-size: 20px;
+}
+.course-list .sc-info-box .sc-info .sc-describe{
+	font-size: 14px;
+	line-height: 20px;
+	color: #666;
+	font-family: "Arial","Hiragino Sans GB", "SimSun",宋体, "Georgia", "serif";
+}
+
+
+.course-list .c-title{
+	height: 100px;
+	line-height: 140px;
+	font-weight: bolder;
+	color: #666;
+	font-size: 18px;
+	padding-left: 40px;
+}
+.course-list .c-title span{
+	display: block;
+	width: 100px;
+	text-align: center;
+	height: 95px;
+	border-bottom: 5px solid #0bb896;
+}
+.course-list .c-l-box{
+	width: 1200px;
+	margin-left: 40px;
+	min-height: 600px;
+	border-top: 1px solid #d5d5d5;
+	padding-left: 30px;
+	padding-bottom: 40px;
+}
+.course-list .course-box{
+	margin-top: 40px;
+	width: 260px;
+	height: 220px;
+	margin-right: 30px;
+	float: left;
+	border: 1px solid #eee;
+}
+.course-list .course-box:hover{
+	box-shadow: 0 0 10px #999;
+}
+.course-list .course-box .c-img{
+	width: 260px;
+	height: 160px;
+	overflow: hidden;
+}
+.course-list .course-box .c-img .pic{
+	width: 260px;
+	height: 160px;
+}
+.course-list .course-box .c-1{
+	height: 40px;
+	line-height: 40px;
+}
+.course-list .course-box .c-2{
+	height: 20px;
+	line-height: 10px;
+	font-size: 13px;
+}
+.course-list .course-box .c-2 .c-num{
+	display: block;
+	float: left;
+	width: 130px;
+	text-align: left;
+	text-indent: 60px;
+	color: #888;
+}
+.course-list .course-box .c-2 .c-sc{
+	display: block;
+	float: left;
+	width: 130px;
+	text-align: left;
+	color: #888;
+	text-indent: 5px;
+}
+
+.sc-t-list{
+	height: 800px;
+	background-color: #fff;
+}
+.sc-t-list .t-title{
+	height: 100px;
+	line-height: 140px;
+	font-weight: bolder;
+	color: #666;
+	font-size: 18px;
+	padding-left: 40px;
+}
+.sc-t-list .t-title span{
+	display: block;
+	width: 100px;
+	text-align: center;
+	height: 95px;
+	border-bottom: 5px solid #0bb896;
+}
+.sc-t-list .t-l-box{
+	width: 1200px;
+	height: 600px;
+	border-top: 1px solid #d5d5d5;
+	margin-left: 40px;
+	padding-left: 30px;
+	padding-top: 30px;
+}
+.sc-t-list .t-l-box .teacher-box{
+	display: block;
+	width: 500px;
+	height: 120px;
+	padding-top: 10px;
+	padding-left: 100px;
+	float: left;
+	margin: 10px 0;
+}
+.sc-t-list .t-l-box .teacher-box:hover{
+	color: #0bb896;
+}
+.sc-t-list .t-l-box .teacher-box .t-img{
+	width: 110px;
+	height: 110px;
+	border: 2px solid #eee;
+	border-radius: 56px;
+	overflow: hidden;
+}
+.sc-t-list .t-l-box .teacher-box .t-img:hover{
+	box-shadow: 0 0 5px #999;
+}
+.sc-t-list .t-l-box .teacher-box img{
+	width: 110px;
+	height: 110px;
+}
+.sc-t-list .t-l-box .teacher-box .t-1,
+.sc-t-list .t-l-box .teacher-box .t-2,
+.sc-t-list .t-l-box .teacher-box .t-img{
+	float: left;
+}
+.sc-t-list .t-l-box .teacher-box .t-1{
+	width: 300px;
+	height: 40px;
+	line-height: 40px;
+	font-size: 16px;
+	text-indent: 20px;
+}
+.sc-t-list .t-l-box .teacher-box .t-2{
+	width: 300px;
+	text-indent: 20px;
+	font-size: 14px;
+	color: #666;
+}
+.sc-t-list .t-l-box .t-btn{
+	height: 40px;
+	text-align: right;
+}
+.sc-t-list .t-l-box .t-btn a{
+	display: inline-block;
+	border: 1px solid #ddd;	
+	line-height: 30px;
+	text-align: center;
+	font-size: 15px;
+	color: #999;
+}
+.sc-t-list .t-l-box .t-btn .last-page,
+.sc-t-list .t-l-box .t-btn .next-page{
+	width: 60px;
+	height: 30px;
+}
+.sc-t-list .t-l-box .t-btn .p{
+	height: 30px;
+	width: 30px;
+}
+.sc-t-list .t-l-box .t-btn a:hover{
+	background-color: #0bb896;
+	color: #fff;
+}

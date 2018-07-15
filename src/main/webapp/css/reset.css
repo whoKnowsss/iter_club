@@ -1,0 +1,20 @@
+*{
+	margin: 0;padding: 0;
+}
+body{
+	min-width: 1346px;
+}
+.f-01{
+	text-decoration: none;
+}
+.f-02{
+	list-style: none;
+}
+.clear{
+	clear: both;
+}
+.border-box{
+	width: 32px;
+	position: absolute;
+	border-bottom: 3px solid #0BB896;
+}

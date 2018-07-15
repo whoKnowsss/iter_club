@@ -1,0 +1,9 @@
+.conta-left-box .course-info-box .course-info .info-value{
+text-align: left;
+	font-family:'Helvetica';
+	text-indent: 2em;
+	font-size: 13px;
+	line-height: 22px;
+	color: #666;
+	padding-right: 40px;
+}

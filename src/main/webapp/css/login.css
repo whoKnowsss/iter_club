@@ -1,0 +1,98 @@
+.l-top{
+	height: 90px;
+	background-color: #fff;
+}
+.l-top .l-logo{
+	margin-top: 11px;
+	margin-left: 46px;
+}
+.l-bottom{
+	height: 125px;
+	background-color: #fff;
+	line-height: 125px;
+	font-size: 46px;
+	font-family: '微软雅黑';
+	color: #A6A6A6;
+	font-weight: bolder;
+	text-align: center;	
+}
+.l-middle{
+	width: 100%;;
+	height: 680px;
+	position: relative;
+}
+.l-middle img{
+	width: 100%;
+	min-width:  1346px;
+	height: 680px;
+}
+.l-middle .login-box{
+	width: 415px;
+	height: 360px;
+	background: #fff;
+	opacity: 0.91;
+	z-index: 1;
+	position: absolute;
+	left: 787px;
+	top: 163px;
+}
+
+.login-box .login-title{
+	color: #575758;
+	font-size: 21px;
+	font-weight: bolder;
+	font-family: '微软雅黑';
+	height: 36px;
+	padding-top: 24px;
+	text-align: center;
+	position: relative;
+	margin-bottom: 35px;
+}
+.login-box .login-title span:after{
+	content: '';
+	position: absolute;
+	left: 47%;
+	top: auto;
+	bottom: 0;
+	right: auto;
+	height: 4px;
+	width: 25px;
+	background-color: #0bb896;
+}
+.login-box input{
+	display: block;
+}
+.login-box .l-input{
+	width: 298px;
+	height: 32px;
+	color: #a2a2a2;
+	padding-left: 2px;
+	font-size: 15px;
+	font-weight: bolder;
+	margin-bottom: 35px;
+	border-style: none;
+	border-bottom: 2px solid #C3C2C0;
+	background-color: #fff;
+	margin-left: 52px;
+}
+.login-box .l-btn{
+	width: 300px;
+	height: 35px;
+	color: #eee;
+	margin-left: 52px;
+	font-size: 16px;
+	background-color: #0bb896;
+	border: none;
+	border-radius: 5px;
+}
+.login-box .register{
+	text-align: right;
+	margin-right: 64px;
+	font-size: 12px;
+	color: #999;
+	margin-top: 15px;
+}
+.login-box .register a{
+	color: #666;
+	font-weight: bolder;
+}
