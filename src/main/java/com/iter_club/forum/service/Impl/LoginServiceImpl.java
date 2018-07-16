@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 /**
  * Created by Administrator on 2016-12-04.
@@ -24,19 +25,8 @@ public class LoginServiceImpl implements LoginService {
     UserforumService service;
 
     public Userforum get() {
-        Cookie[] cookies = request.getCookies();
-        if (cookies != null) {
-            for (Cookie cookie : cookies) {
-
-                if (cookie.getName().equals(Const.COOKIE_LOGIN_USER)) {
-                    String id = cookie.getValue();
-                    if(id != null && !id.equals("")){
-                        Userforum userforum = service.selectByPrimaryKey(id);
-                        return userforum;
-                    }
-                }
-            }
-        }
-        return null;
+        HttpSession session = request.getSession();
+        Userforum userforum = (Userforum) session.getAttribute("userforum");
+        return userforum;
     }
 }

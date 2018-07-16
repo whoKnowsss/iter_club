@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html;charset=utf-8"
          pageEncoding="UTF-8" %>
 <%@ include file="refer.jsp" %>
 
@@ -27,7 +27,7 @@
                         <input type="password" class="password" name="password" placeholder="登陆密码">
                     </div>
                     <div class="login-group">
-                        <a class="forget" href="${ctx}/portal/userforum/forget">忘记密码</a>
+                        <a class="forget" href="${ctx}/portal/user/forget">忘记密码</a>
                     </div>
                     <p class="help-block">
                         ${info}

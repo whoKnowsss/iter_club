@@ -16,6 +16,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
@@ -31,15 +32,9 @@ public class UserforumController extends BaseController {
     @Resource
     LoginService loginService;
 
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String login() {
-        return "forum/login";
-    }
 
-    @RequestMapping(value = "/reg", method = RequestMethod.GET)
-    public String reg() {
-        return "forum/reg";
-    }
+
+
 
     @RequestMapping(value = "/message", method = RequestMethod.GET)
     public String message() {
@@ -51,14 +46,7 @@ public class UserforumController extends BaseController {
         return "forum/user/index";
     }
 
-    @RequestMapping(value = "/logout", method = RequestMethod.GET)
-    public String logout(HttpServletResponse out) {
-        Cookie cookie = new Cookie(Const.COOKIE_LOGIN_USER,"");
-        cookie.setMaxAge(-1);
-        cookie.setPath("/");
-        out.addCookie(cookie);
-        return "forum/clubindex";
-    }
+
 
     /**
      * 获取登陆的用户
@@ -69,9 +57,10 @@ public class UserforumController extends BaseController {
     @ResponseBody
     @RequestMapping(value = "/getuser", method = RequestMethod.GET)
     public void getUser(HttpServletRequest request, HttpServletResponse out) throws IOException {
-        out.setContentType("text/html; charset=utf-8");
+        out.setContentType("text/html;charset=utf-8");
         Response resp = new Response();
-        Userforum userforum = loginService.get();
+        HttpSession session=request.getSession();
+        Userforum userforum = (Userforum) session.getAttribute("userforum");
         if(userforum == null){
             resp.Status = false;
             resp.Result = null;
@@ -86,7 +75,7 @@ public class UserforumController extends BaseController {
     @ResponseBody
     @RequestMapping(value = "/getbyid", method = RequestMethod.GET)
     public void getbyid(String uid, HttpServletResponse out) throws IOException {
-        out.setContentType("text/html; charset=utf-8");
+        out.setContentType("text/html;charset=utf-8");
         Response resp = new Response();
         Userforum userforum = service.selectByPrimaryKey(uid);
         if(userforum == null){
@@ -100,48 +89,14 @@ public class UserforumController extends BaseController {
         out.getWriter().print(gson.toJson(resp));
     }
 
-    @ResponseBody
-    @RequestMapping(value = "/addUser", method = RequestMethod.POST)
-    public void addUser(HttpServletResponse out, String name, String account, String pwd) throws IOException {
-        out.setContentType("text/html; charset=utf-8");
-        try {
 
-            Userforum userforum = new Userforum();
-            userforum.setName(name);
-            userforum.setAccount(account);
-            userforum.setPwd(MD5.Encode(pwd));
 
-            service.insert(userforum);
-            response.Status = true;
-        } catch (Exception e) {
-            response.Status = false;
-            response.Message = e.getMessage();
-        }
-        out.getWriter().print(gson.toJson(response));
-    }
 
-    @ResponseBody
-    @RequestMapping(value = "/check", method = RequestMethod.POST)
-    public void checkUser(HttpServletResponse out, String account, String pwd) throws IOException {
-        out.setContentType("text/html; charset=utf-8");
-        try {
-            Userforum u = service.check(account, pwd);
-            Cookie cookie = new Cookie(Const.COOKIE_LOGIN_USER, u.getId());
-            cookie.setPath("/");
-            cookie.setMaxAge(360000);
-            out.addCookie(cookie);
-            response.Status = true;
-        } catch (Exception e) {
-            response.Status = false;
-            response.Message = e.getMessage();
-        }
-        out.getWriter().print(gson.toJson(response));
-    }
 
     @ResponseBody
     @RequestMapping(value = "/getnew", method = RequestMethod.GET)
     public void getnew(HttpServletResponse out, String key, int index, int size) throws IOException {
-        out.setContentType("text/html; charset=utf-8");
+        out.setContentType("text/html;charset=utf-8");
         response.Status = true;
         response.Result = service.Get(key, index, size);
 

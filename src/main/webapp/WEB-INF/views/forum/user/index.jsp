@@ -6,7 +6,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>OpenAuth.net官方社区 - 最好用的.net权限工作流框架</title>
+    <title>ITer_Club（艾特社区）</title>
     <meta name="Keywords" content="openauth.net,Openauth,权限管理,工作流,workflow">
     <meta name="Description" content="openauth.net,openauth,权限管理，工作流,workflow">
     <link rel="stylesheet" href="${ctx}/resources/layui/css/layui.css">
@@ -27,7 +27,7 @@
 
 
     <div class="fly-home" style="background-image: url();">
-        <img src="${ctx}/resources/fly/images/avatar/{{info.pic}}" alt="{{info.name}}">
+        <img src="${ctx}{{info.pic}}" alt="{{info.name}}">
         <h1>{{info.name}}
             <i class="iconfont
   {{# if(info.sex == 0){ }}
@@ -143,7 +143,7 @@
 
 <jsp:include page="../layoutbbs/footer.jsp"></jsp:include>
 <script>
-    $.get("/userforum/getbyid", { //个人资料
+    $.get("/forum/user/getbyid", { //个人资料
         uid: QueryString['uid'],
     }, function (data) {
         var obj = JSON.parse(data);
@@ -164,7 +164,7 @@
         });
     });
 
-    $.get("/questions/getbyuser", { //问题详情
+    $.get("/forum/questions/getbyuser", { //问题详情
         uid: QueryString['uid'],
         index:1,
         size:10
@@ -182,7 +182,7 @@
         });
     });
 
-    $.get("/questions/getbyuseranswer", { //问题详情
+    $.get("/forum/questions/getbyuseranswer", { //问题详情
         uid: QueryString['uid'],
         index:1,
         size:10

@@ -1,53 +1,190 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
+<%--
+  Created by IntelliJ IDEA.
+  User: 11655
+  Date: 7/14/2018
+  Time: 12:18 AM
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page language="java" contentType="text/html;charset=UTF-8"
+         pageEncoding="UTF-8" %>
 <%@ include file="../../refer.jsp" %>
-    <script src="${ctx}/resources/jquery.js"></script>
-    <script src="${ctx}/resources/layui/layui.js"></script>
-    <div class="header">
-        <div class="main">
-            <a class="logo" href="${ctx}/forum/club/index" title="OpenAuth.Net">OpenAuth.Net社区</a>
-            <div class="nav">
-                <a class="nav-this" href="${ctx}/forum/club/index">
-                    <i class="iconfont icon-wenda"></i>问答
-                </a>
-                <a href="${ctx}/forum/" target="_blank">
-                    <i class="iconfont icon-ui"></i>框架
-                </a>
-            </div>
 
-            <div class="nav-userforum">
-                <div id="view"></div>
-            </div>
+
+<!DOCTYPE html>
+<html>
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>ITer_Club（艾特社区）</title>
+    <link rel="stylesheet" href="${ctx}/css/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="${ctx}/css/css/ydx-main.css"/>
+    <script src="${ctx}/js/jquery.min.js"></script>
+    <script src="${ctx}/js/bootstrap.js"></script>
+
+</head>
+<body>
+
+<!-- <nav class="navbar navbar-default my-navbar navbar-inverse">  -->
+
+<nav class="navbar navbar-default my-navbar ">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <!-- <img alt="Brand" class="logo" src="../image/ydx6.png"> -->
+            <a class="navbar-brand mynavbar-brand" href="${ctx}/portal/index">
+                <img alt="Brand" class="logo" src="${ctx}/image/iter_logo.png">
+            </a>
+
+            <!--  -->
         </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav my-navbar-nav">
+                <li>
+                    <a href="${ctx}/portal/index">
+                        首页
+                    </a>
+                </li>
+                <li>
+                    <a href="${ctx}/portal/course/category_code=1/status=-1">
+                        精品课程
+                    </a>
+                </li>
+
+
+                <li>
+                    <a href="${ctx}/forum/club/index">
+                        社区讨论
+                    </a>
+                </li>
+                <li>
+
+                    <a href="${ctx}/portal/code/list">
+                        在线实战
+                    </a>
+                </li>
+
+            </ul>
+            <c:if test="${sessionScope.user != null}">
+                <ul class="navbar-right mynav">
+
+
+
+                        <%--<img src="${sessionScope.user.photo}" width="50px" height="50px" alt="" class="user-img">--%>
+                    <li class="mydropdown">
+
+                        <a href="#" class="mydropdown-name">${sessionScope.user.name}<span class="caret"></span></a>
+
+                        <ul class="dropdown-menu mydropdown-menu">
+                            <li class="mydropdown-menu-li">
+                                <a href="${ctx}/user/toProfile">
+                                    个人中心
+                                </a>
+                            </li>
+                            <li class="mydropdown-menu-li">
+                                <a href="${ctx}/forum/user/index?uid=${user.UUID}">
+                                    我的论坛
+                                </a>
+                            </li>
+
+                            <li class="mydropdown-menu-li">
+                                <a href="${ctx}/portal/logout">
+                                    退出
+                                </a>
+                            </li>
+                        </ul>
+
+                    </li>
+                </ul>
+            </c:if>
+            <c:if test="${sessionScope.user == null}">
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="${ctx}/portal/toLogin">登陆</a></li>
+                    <li><a href="${ctx}/portal/toRegister">注册</a></li>
+                </ul>
+            </c:if>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+
+<div class="go-top" data-toggle="tooltip" data-placement="left" title="返回顶部">
+    <div class="arrow">
     </div>
+    <div class="stick">
+    </div>
+</div>
 
-    <script id="demo" type="text/html">
-        {{# if(d.Status){ }}
-        <!-- 登入后的状态 -->
 
-        <a class="avatar" href="${ctx}/forum/userforum/index?uid={{d.Result.id}}">
-        {{# if(d.Result.pic !=""){}}
-           <img src="${ctx}/resources/fly/images/avatar/{{= d.Result.pic}}">
-            {{# } }}
-            
-            <cite>{{= d.Result.name}}</cite>
-            <i>{{# if(d.Result.rmb>0){}}
-            Vip{{= d.Result.rmb}}
-            {{# } }}</i>
-        </a>
-        <div class="nav">
-            <a href="${ctx}/forum/userforum/message"><i class="iconfont icon-qq" style="top: 0; font-size: 22px;"></i>消息</a>
-            <a href="${ctx}/forum/userforum/logout"><i class="iconfont icon-tuichu" style="top: 0; font-size: 22px;"></i>退了</a>
-        </div>
-        {{# }else{ }}
-        <!-- 未登入状态 -->
-        <a class="unlogin" href="userforum/login"><i class="iconfont icon-touxiang"></i></a>
-        <span><a href="${ctx}/forum/userforum/login">登入</a><a href="${ctx}/forum/userforum/reg">注册</a></span>
-        <p class="out-login">
-            <a href="" onclick="layer.msg('正在通过QQ登入', {icon:16, shade: 0.1, time:0})" class="iconfont icon-qq" title="QQ登入"></a>
-            <a href="" onclick="layer.msg('正在通过微博登入', {icon:16, shade: 0.1, time:0})" class="iconfont icon-weibo" title="微博登入"></a>
-        </p>
-        {{# } }}
-    </script>
+<script>
+    $(window).scroll(function () {
+        if ($(".navbar").offset().top > 50) {
+            $(".navbar-fixed-top").addClass("top-nav");
+            $('.logo').hide();
+        } else {
+            $(".navbar-fixed-top").removeClass("top-nav");
+            $('.logo').show();
 
-    <script src="${ctx}/blljs/bbsheader.js">
-    </script>
+        }
+    });
+
+    $(document).ready(function () {
+        dropdownOpen();//调用
+        $('ul.layui-fixbar').remove()
+    });
+
+    /**
+     * 鼠标划过就展开子菜单，免得需要点击才能展开
+     */
+    function dropdownOpen() {
+
+        var $dropdownLi = $('li.mydropdown');
+
+        $dropdownLi.mouseover(function () {
+            $(this).addClass('open');
+        }).mouseout(function () {
+            $(this).removeClass('open');
+        });
+    }
+
+</script>
+<script type="text/javascript">
+    $(function () {
+        $(window).scroll(function () {
+            if ($(window).scrollTop() > 600) $('div.go-top').show();
+            else $('div.go-top').hide();
+        });
+        $('div.go-top').click(function () {
+            $('html, body').animate({
+                    scrollTop: 0
+                },
+                600);
+        });
+    });
+
+</script>
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

@@ -5,7 +5,7 @@
  */
 function loadQuestions(laytpl, laypage, index, renderpager){
     var type = QueryString['type'];
-    $.get("/questions/get", {
+    $.get("/forum/questions/get", {
         index: index,
         size: 10,
         type: type
@@ -38,18 +38,19 @@ layui.use(['laypage', 'laytpl'], function() {
 
     loadQuestions(laytpl, laypage, 1, true);
 
-    $.get("/user/getnew", {
+    $.get("/forum/user/getnew", {
           index: 1,
           size: 8
       }, function(data) {
+
           var obj = JSON.parse(data);
-          var getTpl = $("#user").html();
+          var getTpl = $("#userforum").html();
           laytpl(getTpl).render(obj, function(html) {
-              $("#users").html(html);
+              $("#userforums").html(html);
           });
       });
 
-      $.get("/questions/gethot", {
+      $.get("/forum/questions/gethot", {
           index: 1,
           size: 10
       }, function(data) {

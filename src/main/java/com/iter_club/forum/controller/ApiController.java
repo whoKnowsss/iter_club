@@ -31,7 +31,7 @@ public class ApiController extends BaseController {
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
     public void upload(HttpServletRequest request,
                     HttpServletResponse out) throws IOException {
-        out.setContentType("text/html; charset=utf-8");
+        out.setContentType("text/html;charset=utf-8");
         Userforum userforum = loginService.get();
         if(userforum ==  null)
         {

@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html;charset=utf-8"
 		 pageEncoding="UTF-8" %>
 <%@ include file="refer.jsp" %>
 
@@ -6,7 +6,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,userforum-scalable=no" />
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 	<title>ITer_Club（艾特社区）</title>
 	<link rel="stylesheet" type="text/css" href="${ctx}/css/course.css">
 	<link rel="stylesheet" type="text/css" href="${ctx}/css/course-learn.css">
@@ -118,10 +118,10 @@
         $(function(){
             $('.login-box').hover(function(){
                 $(this).css('background-color','#242528');
-                $('.userforum-operation').css('display','block');
+                $('.user-operation').css('display','block');
             },function(){
                 $(this).css('background-color','#2E323E');
-                $('.userforum-operation').css('display','none');
+                $('.user-operation').css('display','none');
             });
         });
 	</script>

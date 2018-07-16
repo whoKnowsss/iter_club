@@ -1,4 +1,4 @@
-$.get("/user/getuser", function (data) {
+$.get("/forum/user/getuser", function (data) {
     var obj = JSON.parse(data);
 
     if (obj.Status) {

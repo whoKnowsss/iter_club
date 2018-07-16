@@ -27,7 +27,7 @@ public class MessageController {
     @RequestMapping(value = "/get", method = RequestMethod.POST)
     public void get(String key, int index, int size,
                        HttpServletResponse out) throws IOException {
-        out.setContentType("text/html; charset=utf-8");
+        out.setContentType("text/html;charset=utf-8");
         Response response = new Response();
         try {
             response.Status = true;
@@ -42,7 +42,7 @@ public class MessageController {
     @ResponseBody
     @RequestMapping(value = "/del", method = RequestMethod.POST)
     public void del(String id, HttpServletResponse out) throws IOException {
-        out.setContentType("text/html; charset=utf-8");
+        out.setContentType("text/html;charset=utf-8");
         Response response = new Response();
         try {
             service.del(id);
@@ -56,7 +56,7 @@ public class MessageController {
     @ResponseBody
     @RequestMapping(value = "/clear", method = RequestMethod.POST)
     public void clear(HttpServletResponse out) throws IOException {
-        out.setContentType("text/html; charset=utf-8");
+        out.setContentType("text/html;charset=utf-8");
         Response response = new Response();
         try {
             service.delall();

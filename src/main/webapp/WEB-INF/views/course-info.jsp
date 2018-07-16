@@ -1,6 +1,6 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page import="com.iter_club.portal.entity.Course" %>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html;charset=utf-8"
          pageEncoding="UTF-8" %>
 <%@ include file="refer.jsp" %>
 
@@ -40,7 +40,7 @@
                 <div class="moco-btn l learn-btn green-btn red-btn">
 
                     <c:choose>
-                        <c:when test="${sessionScope.userforum ne null}">
+                        <c:when test="${sessionScope.user ne null}">
                             <c:if test="${leanred eq 1}">
                                 <a href="#" class="J-learn-course">
                                     继续学习
@@ -148,7 +148,7 @@
     <%--<li data-media-id="15609">--%>
     <%--<a href="{% url 'courses:video' video.id %}" class="J-media-item">--%>
     <%--{{ video.name }} {{ video.learn_times |floatformat:0 }}秒--%>
-    <%--{% if request.userforum.is_authenticated %}--%>
+    <%--{% if request.user.is_authenticated %}--%>
     <%--{% for progess in progesses %}--%>
     <%--{% ifequal video progess.video %}--%>
     <%--{% if progess.is_finish %}--%>
@@ -343,7 +343,7 @@
                 <%--<button class="course-abandon-btn">课程已结束</button>--%>
                 <%--</c:when>--%>
 
-                <%--<c:when test="${empty userforum}">--%>
+                <%--<c:when test="${empty user}">--%>
                 <%--<%	session.setAttribute("before_page","course-info");%>--%>
                 <%--<form action="${ctx}/login/toLogin" method="post" name="formtologin" id="formtologin">--%>
                 <%--<input type="hidden" name="id" id="courseid" ></input>--%>
@@ -370,7 +370,7 @@
                 <%--<input type="hidden" name="userid" id="userid" ></input>--%>
                 <%--<input type="hidden" name="joinid" id="joinid" ></input>--%>
                 <%--</form>--%>
-                <%--<button onclick="toJoin(${userforum.ID},${course.ID})" class="course-abandon-btn">参加课程1</button>--%>
+                <%--<button onclick="toJoin(${user.ID},${course.ID})" class="course-abandon-btn">参加课程1</button>--%>
                 <%--</c:if>--%>
                 <%--</c:when>--%>
 
@@ -466,10 +466,10 @@
     $(function () {
         $('.login-box').hover(function () {
             $(this).css('background-color', '#242528');
-            $('.userforum-operation').css('display', 'block');
+            $('.user-operation').css('display', 'block');
         }, function () {
             $(this).css('background-color', '#2E323E');
-            $('.userforum-operation').css('display', 'none');
+            $('.user-operation').css('display', 'none');
         });
     });
 </script>

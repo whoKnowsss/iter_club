@@ -4,7 +4,7 @@
     <resultMap id="BaseResultMap" type="com.iter_club.portal.entity.Usertocou" >
         <id column="ID" property="ID" jdbcType="INTEGER" />
         <result column="UUID" property="UUID" jdbcType="VARCHAR" />
-        <association property="userforum" column="UserId" select="getUser"/>
+        <association property="user" column="UserId" select="getUser"/>
         <association property="course" column="CourseId" select="getCourse"/>
     </resultMap>
 
@@ -98,7 +98,7 @@
     </resultMap>
 
     <select id="getUser" resultMap="User" parameterType="java.lang.Integer" >
-        select  *  from userforum
+        select  *  from user
         where ID = #{ID,jdbcType=INTEGER}
     </select>
 
@@ -111,8 +111,8 @@
     <select id="selectByUserStatus" resultMap="Course" parameterType="java.lang.Integer" >
         select  course.ID as ID ,course.Name as Name,course.img as img,course.Description as Description ,course.Status AS status ,
         course.CreatedAt AS CreatedAt,course.UpdatedAt as  UpdatedAt,course.TeacherId as TeacherId,course.CategoryId as CategoryId
-        FROM usertocou, course ,userforum
-        where  course.ID = usertocou.CourseID and usertocou.UserID = userforum.ID
+        FROM usertocou, course ,user
+        where  course.ID = usertocou.CourseID and usertocou.UserID = user.ID
         and usertocou.UserID=${UserId}
         <if test="Status != -1">
             and  course.Status = #{Status,jdbcType=INTEGER}
@@ -148,7 +148,7 @@
     <!--<if test="UUID != null">-->
         <!--UUID,-->
     <!--</if>-->
-    <!--<if test="userforum != null">-->
+    <!--<if test="user != null">-->
         <!--UserId-->
     <!--</if>-->
     <!--<if test="course != null">-->
@@ -162,8 +162,8 @@
     <!--<if test="UUID != null">-->
         <!--#{UUID,jdbcType=VARCHAR},-->
     <!--</if>-->
-    <!--<if test="userforum != null">-->
-         <!--#{userforum,jdbcType=OTHER},-->
+    <!--<if test="user != null">-->
+         <!--#{user,jdbcType=OTHER},-->
     <!--</if>-->
     <!--<if test="course != null">-->
         <!--#{course,jdbcType=OTHER},-->

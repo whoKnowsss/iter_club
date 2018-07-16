@@ -7,18 +7,17 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title id="title"> {{title }} - OpenAuth.net官方社区</title>
-    <meta name="Keywords" content="openauth.net,Openauth,权限管理,工作流,workflow">
-    <meta name="Description" content="openauth.net,openauth,权限管理，工作流,workflow">
+
     <link rel="stylesheet" href="${ctx}/resources/layui/css/layui.css">
     <link rel="stylesheet" href="${ctx}/resources/fly/css/global.css">
     <script src="${ctx}/resources/jquery.js"></script>
     <script src="${ctx}/resources/layui/layui.js"></script>
-    <script src="/blljs/queryString.js"></script>
+    <script src="${ctx}/blljs/queryString.js"></script>
 </head>
 
 <body>
+<%@ include file="../layoutbbs/header.jsp" %>
 
-<jsp:include page="../layoutbbs/header.jsp"></jsp:include>
 
 <script id="detail" type="text/html">
     {{#
@@ -26,7 +25,7 @@
     }}
 
     {{#
-    var userforum =layui.cache.userforum;
+    var userforum =layui.cache;
     }}
 
     {{# if(rows){
@@ -70,8 +69,9 @@
                     </div>
                 </div>
                 <div class="detail-about">
-                    <a class="jie-userforum" href="${ctx}/forum/userforum/index?uid={{rows.userforum.id}}">
-                        <img src="${ctx}/resources/fly/images/avatar/{{rows.userforum.pic}}" alt="{{rows.userforum.name}}">
+                    <a class="jie-user" href="${ctx}/forum/user/index?uid={{rows.userforum.id}}">
+                        <img src="${ctx}{{rows.userforum.pic}}"
+                             alt="{{rows.userforum.name}}">
                         <cite>
                             {{rows.userforum.name}}
                             {{# if(rows.userforum.rmb){ }}
@@ -86,7 +86,8 @@
                         <span style="color:#FF7200">悬赏：{{rows.experience}}飞吻</span>
 
                         {{# if((userforum && myself && rows.accept == undefined) || userforum.auth == 1){ }}
-                        <span class="jie-admin" type="edit"><a href="${ctx}/forum/questions/edit?id={{rows.id}}">编辑此贴</a></span>
+                        <span class="jie-admin" type="edit"><a
+                                href="${ctx}/forum/questions/edit?id={{rows.id}}">编辑此贴</a></span>
                         {{# } }}
 
                     </div>
@@ -106,11 +107,13 @@
                     {{# layui.each(jieda, function(index, item){
                     var myda = item.userforum.id == userforum.uid;
                     }}
-                    <li data-id="{{item.id}}" {{item.id== rows.accept ?'class="jieda-daan"' : '' }}>
+                    <li data-id="{{item.id}}" {{item.id== rows.accept ?
+                    'class="jieda-daan"' : '' }}>
                     <a name="item-{{item.time}}"></a>
                     <div class="detail-about detail-about-reply">
-                        <a class="jie-userforum" href="${ctx}/forum/userforum/index?uid={{item.userforum.id}}">
-                            <img src="${ctx}/resources/fly/images/avatar/{{item.userforum.pic}}" alt="{{item.userforum.name}}">
+                        <a class="jie-user" href="${ctx}/forum/user/index?uid={{item.userforum.id}}">
+                            <img src="${ctx}{{item.userforum.pic}}"
+                                 alt="{{item.userforum.name}}">
                             <cite>
                                 <i>{{item.userforum.name}}</i>
                                 {{# if(item.userforum.rmb) { }}
@@ -142,14 +145,14 @@
                         {{# if(userforum.auth == 1 || userforum.auth == 2 || (userforum.uid && myself && !myda)){ }}
                         <div class="jieda-admin">
                             {{# if(userforum.auth == 1 || (userforum.auth == 2 && item.accept != 1)){ }}
-                                <span type="edit">编辑</span>
-                                <span type="del">删除</span>
-                                {{# if(rows.accept == undefined){ }}
-                                <span class="jieda-accept" type="accept">采纳 </span>
-                                {{# } }}
+                            <span type="edit">编辑</span>
+                            <span type="del">删除</span>
+                            {{# if(rows.accept == undefined){ }}
+                            <span class="jieda-accept" type="accept">采纳 </span>
+                            {{# } }}
                             {{# } }}
                             {{# if(rows.accept == undefined && !myda){ }}
-                                <span class="jieda-accept" type="accept">采纳</span>
+                            <span class="jieda-accept" type="accept">采纳</span>
                             {{# } }}
                         </div>
                         {{# } }}
@@ -161,9 +164,8 @@
                 </ul>
 
 
-
                 <div class="layui-form layui-form-pane">
-                    <form action="/questions/addAnswer" method="post">
+                    <form action="${ctx}/forum/questions/addAnswer" method="post">
                         <div class="layui-form-item layui-form-text">
                             <div class="layui-input-block">
                                 <textarea id="L_content" name="content" required lay-verify="required"
@@ -173,7 +175,7 @@
                         </div>
                         <div class="layui-form-item">
                             <input type="hidden" name="jid" value="{{rows.id}}">
-                            <button class="layui-btn" lay-filter="*" lay-submit>提交回答</button>
+                            <button class="layui-btn" lay-filter="*" lay-submit onclick="location.href=location.href">提交回答</button>
                         </div>
                     </form>
                 </div>
@@ -201,7 +203,7 @@
 <script>
     layui.cache.page = 'jie';
 
-    $.get("/questions/getone", { //问题详情
+    $.get("/forum/questions/getone", { //问题详情
         id: QueryString['id']
     }, function (data) {
         var obj = JSON.parse(data);
@@ -211,39 +213,34 @@
             base: '../resources/fly/mods/'
         }).extend({
             fly: 'index'
-        }).use(['fly', 'jquery','vue', 'laytpl','form'], function () {
+        }).use(['fly', 'jquery', 'vue', 'laytpl', 'form'], function () {
             var fly = layui.fly;
             var $ = layui.jquery;
             var laytpl = layui.laytpl;
             var form = layui.form();
-             var vm = new Vue({
-                        el: "#title"
-                        ,data:{
-                           title: obj.Result.title
-                        }
-                    });
+            var vm = new Vue({
+                el: "#title"
+                , data: {
+                    title: obj.Result.title
+                }
+            });
 
-        var getTpl = $("#detail").html();
-        laytpl(getTpl).render(obj, function (html) {
-            $("#details").html(html);
+            var getTpl = $("#detail").html();
+            laytpl(getTpl).render(obj, function (html) {
+                $("#details").html(html);
 
-             $('.detail-body').each(function() {
-                 var othis = $(this),
-                     html = othis.html();
-                 othis.html(fly.content(html));
-             });
+                $('.detail-body').each(function () {
+                    var othis = $(this),
+                        html = othis.html();
+                    othis.html(fly.content(html));
+                });
 
-            fly.layEditor({elem: '.fly-editor'});
+                fly.layEditor({elem: '.fly-editor'});
+            });
         });
-    });
 
 
-
-
-
-
-
-//         $.get("/questions/get", { //热贴
+//         $.get("/forum/questions/get", { //热贴
 //             index: 1,
 //             size: 8
 //         }, function(data) {

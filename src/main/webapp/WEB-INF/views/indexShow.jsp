@@ -1,10 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html;charset=utf-8"
          pageEncoding="UTF-8" %>
 <%@ include file="refer.jsp" %>
 <!doctype  html>
 <html>
 <head>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta http-equiv="content-type" content="text/html;charset=utf-8">
     <title>ITer_Club（艾特社区）</title>
 </head>
 <body onload="getAll()">

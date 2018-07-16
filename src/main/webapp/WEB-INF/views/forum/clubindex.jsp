@@ -6,21 +6,26 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-        <title>OpenAuth.net官方社区 - 最好用的.net权限工作流框架</title>
-        <meta name="Keywords" content="openauth.net,Openauth,权限管理,工作流,workflow">
-        <meta name="Description" content="openauth.net,openauth,权限管理，工作流,workflow">
+        <title>ITer_Club（艾特社区）</title>
+
         <link rel="stylesheet" href="${ctx}/resources/layui/css/layui.css">
         <link rel="stylesheet" href="${ctx}/resources/fly/css/global.css">
-        <script src="${ctx}/resources/layui/layui.js"></script>
         <script src="${ctx}/resources/jquery.js"></script>
+        <script src="${ctx}/resources/layui/layui.js"></script>
 
+        <%--<link rel="stylesheet" type="text/css" href="${ctx}/css/course.css">--%>
+        <%--<link rel="stylesheet" type="text/css" href="${ctx}/css/reset.css">--%>
+        <%--<link rel="stylesheet" type="text/css" href="${ctx}/css/course-info.css">--%>
+        <%--<link rel="stylesheet" href="${ctx}/css/css/ydx-course.css"/>--%>
+        <%--<link rel="stylesheet" href="${ctx}/css/css/ydx-courselist.css">--%>
+        <style>
+            a{color:#c2c2c2}
+        </style>
     </head>
 
     <body>
-
-        <jsp:include page="layoutbbs/header.jsp"></jsp:include>
-
-        <div class="main layui-clear">
+    <%@ include file="layoutbbs/header.jsp" %>
+        <div class="main layui-clear" style=" margin-top: 30px;margin-bottom: 0px;">
             <div class="wrap">
                 <div class="content">
                     <div class="fly-tab">
@@ -43,8 +48,8 @@
                             <ul>
                                 {{# layui.each(d.Result.objects, function(index, item){ }}
                                 <li class="fly-list-li">
-                                    <a href="${ctx}/forum/userforum/index?uid={{item.userforum.id}}" class="fly-list-avatar">
-                                        <img src="${ctx}/resources/fly/images/avatar/{{item.userforum.pic}}" alt="">
+                                    <a href="${ctx}/forum/user/index?uid={{item.userforum.id}}" class="fly-list-avatar">
+                                        <img src="${ctx}{{item.userforum.pic}}" alt="">
                                     </a>
                                     <h2 class="fly-tip">
                                         <a href="${ctx}/forum/questions/detail?id={{ item.id }}">{{ item.title }}</a>
@@ -74,13 +79,13 @@
 
 
                 <h3 class="page-title">新注册用户</h3>
-                <div class="userforum-looklog leifeng-rank">
+                <div class="user-looklog leifeng-rank">
                     <span>
                          <script id="userforum" type="text/html">
                             <ul>
                                 {{# layui.each(d.Result.objects, function(index, item){ }}
-                                 <a href="${ctx}/forum/userforum/index?uid={{item.id}}">
-                                <img src="${ctx}/resources/fly/images/avatar/{{ item.pic }}">
+                                 <a href="${ctx}/forum/user/index?uid={{item.id}}">
+                                <img src="${ctx}{{ item.pic }}">
                                 <cite>{{ item.name }}</cite>
                                 <i>{{ item.answercnt }}次回答</i>
                                 </a>
@@ -111,9 +116,8 @@
 
                 <div class="fly-link">
                     <span>友情链接：</span>
-                    <a href="http://www.layui.com/" target="_blank">Layui</a>
-                    <a href="http://www.openauth.me/" target="_blank">openauth.me</a>
-                    <a href="http://layer.layui.com/" target="_blank">layer</a>
+                    <a href="${ctx}/portal/course/category_code=1/status=-1">精品课程</a>
+                    <a href="${ctx}/portal/code/list" >在线实战</a>
                 </div>
 
 
@@ -134,6 +138,12 @@
                 fly: 'index'
             }).use('fly');
         </script>
+    <%--<script>--%>
+        <%--$(document).ready(function () {--%>
+            <%----%>
+            <%--$('ul.layui-fixbar').remove()--%>
+        <%--});--%>
+    <%--</script>--%>
 
     </body>
 

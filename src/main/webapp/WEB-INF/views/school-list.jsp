@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html;charset=utf-8"
 		 pageEncoding="UTF-8" %>
 <%@ include file="refer.jsp" %>
 
@@ -33,8 +33,8 @@
 			</form>
 		</div>
 
-		<% Object userforum = request.getSession().getAttribute("userforum");
-			if(userforum==null ){
+		<% Object user = request.getSession().getAttribute("user");
+			if(user==null ){
 		%>
 		<!-- 登陆按钮 -->
 		<div class="unlogin-box">
@@ -46,9 +46,9 @@
 
 		<!-- 用户信息 -->
 		<div class="login-box">
-			<img src="${userforum.photo}" width="50px" height="50px" alt="" class="userforum-img">
-			<div class="userforum-operation">
-				<a href="${ctx}/userforum/toPersonal" class="f-01">个人中心</a>
+			<img src="${user.photo}" width="50px" height="50px" alt="" class="user-img">
+			<div class="user-operation">
+				<a href="${ctx}/user/toPersonal" class="f-01">个人中心</a>
 				<a href="${ctx}/login/outLogin" class="f-01">退出登录</a>
 			</div>
 		</div>
@@ -91,10 +91,10 @@
 		$(function(){
 		$('.login-box').hover(function(){
 		$(this).css('background-color','#242528');
-		$('.userforum-operation').css('display','block');
+		$('.user-operation').css('display','block');
 		},function(){
 		$(this).css('background-color','#2E323E');
-		$('.userforum-operation').css('display','none');
+		$('.user-operation').css('display','none');
 		});
 		});
     </script>

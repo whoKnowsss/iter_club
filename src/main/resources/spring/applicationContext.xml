@@ -25,7 +25,7 @@
     <mvc:resources location="/upload/" mapping="/upload/**"/>
     <mvc:resources location="/blljs/" mapping="/blljs/**"/>
     <mvc:resources location="/resources/" mapping="/resources/**"/>
-
+    <mvc:resources location="/forum/" mapping="/forum/**"/>
     <!-- Configures the @Controller programming entity
     <mvc:annotation-driven />-->
     <!-- ②：启动Spring MVC的注解功能，完成请求和注解POJO的映射 -->

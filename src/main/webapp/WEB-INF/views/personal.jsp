@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html;charset=utf-8"
 		 pageEncoding="UTF-8" %>
 <%@ include file="refer.jsp" %>
 
@@ -36,13 +36,18 @@
 	</div>
 
 
-	<% Object userforum = request.getSession().getAttribute("userforum");%>
+	<% Object user = request.getSession().getAttribute("user");%>
 
 	<!-- 用户信息 -->
 	<div class="login-box">
-		<img src="${userforum.photo}" width="50px" height="50px" alt="" class="userforum-img">
-		<div class="userforum-operation">
-			<a href="${ctx}/userforum/toPersonal" class="f-01">个人中心</a>
+		<img src="${user.photo}" width="50px" height="50px" alt="" class="user-img">
+		<div class="user-operation">
+			<a href="${ctx}/user/toPersonal" class="f-01">个人中心</a>
+			<li class="mydropdown-menu-li">
+				<a href="${ctx}/forum/user/index?uid=${user.UUID}">
+					我的论坛
+				</a>
+			</li>
 			<a href="${ctx}/login/outLogin" class="f-01">退出登录</a>
 		</div>
 	</div>
@@ -50,11 +55,11 @@
 <!-- 主体 -->
 <div class="container">
 	<!-- 用户信息 -->
-	<div class="userforum-info-box">
+	<div class="user-info-box">
 		<div class="u-info">
-			<div class="u-img"><img src="${userforum.photo}"></div>
+			<div class="u-img"><img src="${user.photo}"></div>
 			<ul class="u-info-list f-02">
-				<li class="l-1"><span class="u-name">${userforum.name}</span></li>
+				<li class="l-1"><span class="u-name">${user.name}</span></li>
 				<li class="l-2"><span class="u-type">学生</span>&nbsp;|&nbsp;<span class="u-school">山西农业大学</span></li>
 				<li class="l-3">关注<span class="u-focus-num">0</span>人&nbsp;|&nbsp;粉丝<span class="u-fans-num">0</span>人</li>
 			</ul>
@@ -75,12 +80,12 @@
 	<div class="m-body">
 		<div class="my-course">我的课程</div>
 		<div class="course-state-list">
-			<form action="${ctx}/userforum/selectByStatus" method="post" name="formStatu" id="formStatu">
+			<form action="${ctx}/user/selectByStatus" method="post" name="formStatu" id="formStatu">
 				<input type="hidden" name="id" id="formstatus" ></input>
 			</form>
 
 			<ul class="course-state-box f-02">
-				<li class="course-state "><a href="${ctx}/userforum/toPersonal" class="f-01 s-all current">全部</a></li>
+				<li class="course-state "><a href="${ctx}/user/toPersonal" class="f-01 s-all current">全部</a></li>
 				<li class="course-state "><a onclick="toStatus(1)" class="f-01 s-ing">正在进行</a></li>
 				<li class="course-state "><a onclick="toStatus(0)" class="f-01 s-soon">即将开始</a></li>
 				<li class="course-state "><a onclick="toStatus(2)" class="f-01 s-end">已结束</a></li>
@@ -139,10 +144,10 @@
     $(function(){
         $('.login-box').hover(function(){
             $(this).css('background-color','#242528');
-            $('.userforum-operation').css('display','block');
+            $('.user-operation').css('display','block');
         },function(){
             $(this).css('background-color','#2E323E');
-            $('.userforum-operation').css('display','none');
+            $('.user-operation').css('display','none');
         });
     });
     // img放大特效

@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page language="java" contentType="text/html;charset=utf-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
@@ -11,7 +11,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>课程目录</title>
+	<title>ITer_Club（艾特社区）</title>
 	<link rel="stylesheet" type="text/css" href="../../../css/course.css">
 	<link rel="stylesheet" type="text/css" href="../../../css/reset.css">
 </head>
@@ -38,8 +38,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</form>
 		</div>
 
-		<% Object userforum = request.getSession().getAttribute("userforum");
-			if(userforum==null ){
+		<% Object user = request.getSession().getAttribute("user");
+			if(user==null ){
 		%>
 		<!-- 登陆按钮 -->
 		<div class="unlogin-box">
@@ -51,9 +51,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 		<!-- 用户信息 -->
 		<div class="login-box">
-			<img src="${userforum.photo}" width="50px" height="50px" alt="" class="userforum-img">
-			<div class="userforum-operation">
-				<a href="<%=path%>/userforum/toPersonal.action" class="f-01">个人中心</a>
+			<img src="${user.photo}" width="50px" height="50px" alt="" class="user-img">
+			<div class="user-operation">
+				<a href="<%=path%>/user/toPersonal.action" class="f-01">个人中心</a>
 				<a href="<%=path%>/login/outLogin.action" class="f-01">退出登录</a>
 			</div>
 		</div>
@@ -185,10 +185,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		$(function(){
 		$('.login-box').hover(function(){
 		$(this).css('background-color','#242528');
-		$('.userforum-operation').css('display','block');
+		$('.user-operation').css('display','block');
 		},function(){
 		$(this).css('background-color','#2E323E');
-		$('.userforum-operation').css('display','none');
+		$('.user-operation').css('display','none');
 		});
 		});
     </script>

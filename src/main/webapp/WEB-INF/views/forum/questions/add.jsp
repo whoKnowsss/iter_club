@@ -6,9 +6,8 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-        <title>OpenAuth.net官方社区 - 最好用的.net权限工作流框架</title>
-        <meta name="Keywords" content="openauth.net,Openauth,权限管理,工作流,workflow">
-        <meta name="Description" content="openauth.net,openauth,权限管理，工作流,workflow">
+        <title>ITer_Club（艾特社区）</title>
+
         <link rel="stylesheet" href="${ctx}/resources/layui/css/layui.css">
         <link rel="stylesheet" href="${ctx}/resources/fly/css/global.css">
         <script src="${ctx}/resources/layui/layui.js"></script>
@@ -24,7 +23,7 @@
             <!-- <div class="fly-none">并无权限</div> -->
 
             <div class="layui-form layui-form-pane">
-                <form action="/questions/add" method="post">
+                <form action="${ctx}/forum/questions/add" method="post">
                     <div class="layui-form-item ">
                         <label for="L_title " class="layui-form-label ">标题</label>
                         <div class="layui-input-block ">

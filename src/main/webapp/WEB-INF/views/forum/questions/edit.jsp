@@ -6,9 +6,8 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-        <title>OpenAuth.net官方社区 - 最好用的.net权限工作流框架</title>
-        <meta name="Keywords" content="openauth.net,Openauth,权限管理,工作流,workflow">
-        <meta name="Description" content="openauth.net,openauth,权限管理，工作流,workflow">
+        <title>ITer_Club（艾特社区）</title>
+
         <link rel="stylesheet" href="${ctx}/resources/layui/css/layui.css">
         <link rel="stylesheet" href="${ctx}/resources/fly/css/global.css">
         <script src="${ctx}/resources/layui/layui.js"></script>
@@ -25,7 +24,7 @@
             <!-- <div class="fly-none">并无权限</div> -->
 
             <div class="layui-form layui-form-pane">
-                <form action="/questions/edit" method="post">
+                <form action="${ctx}/forum/questions/edit" method="post">
                     <input type="hidden" id="L_id" name="id">
                     <div class="layui-form-item ">
                         <label for="L_title" class="layui-form-label ">标题</label>
@@ -62,7 +61,7 @@
                 var $ = layui.jquery;
                 var form = layui.form();
 
-                $.get("/questions/getone", { //问题详情
+                $.get("/forum/questions/getone", { //问题详情
                     id: QueryString['id']
                 }, function (data) {
                     var obj = JSON.parse(data);

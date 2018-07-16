@@ -1,6 +1,8 @@
 package com.iter_club.portal.controller;
 
 
+import com.iter_club.forum.entity.Userforum;
+import com.iter_club.forum.service.UserforumService;
 import com.iter_club.portal.entity.User;
 import com.iter_club.portal.service.UserService;
 import com.iter_club.portal.service.UsertocouService;
@@ -34,7 +36,8 @@ public class LoginController {
     private MainController mainController;
     @Autowired
     private UserService userService;
-
+    @Autowired
+    private UserforumService userforumService;
     @Autowired
     private UsertocouService usertocouService;
 
@@ -63,13 +66,19 @@ public class LoginController {
             modelAndView.setViewName("login");
             modelAndView.addObject("info", "请输入正确密码！");
             return modelAndView;
+        } else if (user.getStatus() == 0) {
+            modelAndView.setViewName("login");
+            modelAndView.addObject("info", "请进行验证后再登录！");
+            return modelAndView;
         } else {
 
             //将email保存在session，来查看登录状态
             session.removeAttribute("user");
             session.setAttribute("user", user);
 
-
+            Userforum userforum = userforumService.selectByPrimaryKey(user.getUUID());
+            if (userforum != null)
+                session.setAttribute("userforum", userforum);
             modelAndView.setViewName("accountcenter-info");
 
             return modelAndView;

@@ -20,26 +20,26 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
-    from userforum
+    from user
     where ID = #{ID,jdbcType=INTEGER}
   </select>
 
   <select id="selectByEmail" resultMap="BaseResultMap" parameterType="java.lang.String" >
-    select * from userforum
+    select * from user
     where email = #{email,jdbcType=VARCHAR}
   </select>
 
   <select id="selectByUUID" resultMap="BaseResultMap" parameterType="java.lang.String" >
-    select * from userforum
+    select * from user
     where UUID = #{UUID,jdbcType=VARCHAR}
   </select>
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from userforum
+    delete from user
     where ID = #{ID,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.iter_club.portal.entity.User" >
-    insert into userforum (ID, UUID, Name,
+    insert into user (ID, UUID, Name,
       Gender, Mobile, Email, 
       Password, Photo, CreatedAt, 
       UpdatedAt,status)
@@ -49,7 +49,7 @@
       #{updatedAt,jdbcType=TIMESTAMP},#{status,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.iter_club.portal.entity.User" >
-    insert into userforum
+    insert into user
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="ID != null" >
         ID,
@@ -122,7 +122,7 @@
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.iter_club.portal.entity.User" >
-    update userforum
+    update user
     <set >
       <if test="UUID != null" >
         UUID = #{UUID,jdbcType=VARCHAR},
@@ -158,7 +158,7 @@
     where ID = #{ID,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.iter_club.portal.entity.User" >
-    update userforum
+    update user
     set UUID = #{UUID,jdbcType=VARCHAR},
       Name = #{name,jdbcType=VARCHAR},
       Gender = #{gender,jdbcType=VARCHAR},

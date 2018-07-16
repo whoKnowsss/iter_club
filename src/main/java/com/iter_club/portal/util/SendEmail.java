@@ -102,7 +102,7 @@ public class SendEmail {
         System.out.println(con);
         try {
             con=new String(con.getBytes("GBK"),"UTF-8");
-            con=con.replace("#####change#####","http://localhost:8080/user/yanzheng/uuid="+code);
+            con=con.replace("#####change#####","http://www.lixiufeng.me/user/yanzheng/uuid="+code);
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }

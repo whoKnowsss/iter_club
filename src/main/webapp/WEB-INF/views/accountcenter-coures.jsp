@@ -1,5 +1,5 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html;charset=utf-8"
          pageEncoding="UTF-8" %>
 <%@ include file="refer.jsp" %>
 <%@ include file="accountcenter-base.jsp" %>
@@ -35,9 +35,9 @@
         <ul class="">
 
             <ul class="">
-                <li><a href="${ctx}/userforum/toProfile">我的设置</a></li>
-                <li class="select"><a href="${ctx}/userforum/tocourses/id=-1">我的课程</a></li>
-                <li ><a href="${ctx}/userforum/opencourses/list">我要开课</a></li>
+                <li><a href="${ctx}/user/toProfile">我的设置</a></li>
+                <li class="select"><a href="${ctx}/user/tocourses/id=-1">我的课程</a></li>
+
             </ul>
         </ul>
     </div>
@@ -48,13 +48,13 @@
             <li>
                 <ul class="nav nav-pills" style="background: #fff;margin-bottom: 20px;">
                     <li role="presentation" class="course-nav-item ${status eq -1 ? "active" : ""}"><a
-                            href="${ctx}/userforum/tocourses/id=-1"> 全部 </a></li>
+                            href="${ctx}/user/tocourses/id=-1"> 全部 </a></li>
                     <li role="presentation" class="course-nav-item ${status eq 0 ? "active" : ""}"><a
-                            href="${ctx}/userforum/tocourses/id=0"> 即将开始 </a></li>
+                            href="${ctx}/user/tocourses/id=0"> 即将开始 </a></li>
                     <li role="presentation" class="course-nav-item ${status eq 1 ? "active" : ""}"><a
-                            href="${ctx}/userforum/tocourses/id=1"> 正在进行 </a></li>
+                            href="${ctx}/user/tocourses/id=1"> 正在进行 </a></li>
                     <li role="presentation" class="course-nav-item ${status eq 2 ? "active" : ""}"><a
-                            href="${ctx}/userforum/tocourses/id=2"> 已经结束 </a></li>
+                            href="${ctx}/user/tocourses/id=2"> 已经结束 </a></li>
                 </ul>
             </li>
             <c:forEach var="one" items="${user_course}" varStatus="cg">
@@ -102,7 +102,7 @@
                                 </div>
                                 <div class="more_list_hd">
                                     <div class="remove_btn" id='remove_btn' style="z-index: 10000"><a
-                                            href="${ctx}/portal/course/delete/userforum=${sessionScope.userforum.ID}/course=${one.ID}">删除课程</a>
+                                            href="${ctx}/portal/course/delete/user=${sessionScope.user.ID}/course=${one.ID}">删除课程</a>
                                     </div>
 <%--${one}--%>
                                 </div>

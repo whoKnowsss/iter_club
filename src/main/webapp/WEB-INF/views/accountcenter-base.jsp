@@ -1,11 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html;charset=utf-8"
          pageEncoding="UTF-8" %>
 <%@ include file="refer.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, userforum-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <title>ITer_Club（艾特社区）</title>
     <link rel="stylesheet" href="${ctx}/css/css/bootstrap.min.css"/>
     <link href="${ctx}/css/css/ydx-account.css" rel="stylesheet"/>
@@ -180,23 +180,27 @@
                 </li>
 
             </ul>
-            <c:if test="${sessionScope.userforum != null}">
+            <c:if test="${sessionScope.user != null}">
                 <ul class="navbar-right mynav">
 
 
-                    <%--<img src="${sessionScope.userforum.photo}" width="50px" height="50px" alt="" class="userforum-img">--%>
+                    <%--<img src="${sessionScope.user.photo}" width="50px" height="50px" alt="" class="user-img">--%>
 
                     <li class="mydropdown">
 
-                        <a href="#" class="mydropdown-name">${sessionScope.userforum.name}<span class="caret"></span></a>
+                        <a href="#" class="mydropdown-name">${sessionScope.user.name}<span class="caret"></span></a>
 
                         <ul class="dropdown-menu mydropdown-menu">
                             <li class="mydropdown-menu-li">
-                                <a href="${ctx}/userforum/toProfile">
+                                <a href="${ctx}/user/toProfile">
                                     个人中心
                                 </a>
                             </li>
-
+                            <li class="mydropdown-menu-li">
+                                <a href="${ctx}/forum/user/index?uid=${user.UUID}">
+                                    我的论坛
+                                </a>
+                            </li>
                             <li class="mydropdown-menu-li">
                                 <a href="${ctx}/portal/logout">
                                     退出
@@ -207,7 +211,7 @@
                     </li>
                 </ul>
             </c:if>
-            <c:if test="${sessionScope.userforum == null}">
+            <c:if test="${sessionScope.user == null}">
 
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="${ctx}/portal/toLogin">登陆</a></li>
