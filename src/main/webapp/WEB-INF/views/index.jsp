@@ -151,7 +151,7 @@
         <div class="lecturer-list clearfix">
 
 
-            <a href="${ctx}/code/method?java" class="lecturer-item" data-track="jyms-1-1">
+            <a href="${ctx}/code/method=java" class="lecturer-item" data-track="jyms-1-1">
                 <img class="lecturer-uimg" src="${ctx}/image/course/j1.jpg"/> <span
                     class="lecturer-name">JAVA</span>
                 <span class="lecturer-title">在线JAVA编译</span>
@@ -160,7 +160,7 @@
             </a>
 
 
-            <a href="${ctx}/code/methos?html" class="lecturer-item" data-track="jyms-1-1">
+            <a href="${ctx}/code/method=html" class="lecturer-item" data-track="jyms-1-1">
                 <img class="lecturer-uimg" src="${ctx}/image/course/html.png"/> <span
                     class="lecturer-name">HTML</span>
                 <span class="lecturer-title">实时HTML运行</span>

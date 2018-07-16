@@ -11,7 +11,6 @@ public class Course {
 
     private Teacher teacher;
 
-    private School school;
 
     private String description;
 
@@ -28,12 +27,12 @@ public class Course {
     public Course() {
     }
 
-    public Course(Date updatedAt, String UUID, String name, Teacher teacher, School school, String description, Category category, Integer status, String img, Date createdAt, Integer ID) {
+    public Course(Date updatedAt, String UUID, String name, Teacher teacher, String description, Category category, Integer status, String img, Date createdAt, Integer ID) {
         this.updatedAt = updatedAt;
         this.UUID = UUID;
         Name = name;
         this.teacher = teacher;
-        this.school = school;
+
         this.description = description;
         this.category = category;
         this.status = status;
@@ -82,13 +81,6 @@ public class Course {
         this.teacher = teacher;
     }
 
-    public School getSchool() {
-        return school;
-    }
-
-    public void setSchool(School school) {
-        this.school = school;
-    }
 
     public String getDescription() {
         return description;
@@ -137,7 +129,7 @@ public class Course {
                 ", UUID='" + UUID + '\'' +
                 ", Name='" + Name + '\'' +
                 ", teacher=" + teacher +
-                ", school=" + school +
+
                 ", description='" + description + '\'' +
                 ", category=" + category +
                 ", status=" + status +

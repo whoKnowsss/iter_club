@@ -164,22 +164,31 @@ public class UserController {
     public ModelAndView register(HttpSession session, @PathVariable("code") String code) {
         ModelAndView modelAndView = new ModelAndView();
         User user = userService.selectByUUID(code);
-        if (user != null) {
-            modelAndView.addObject("user", user);
-            modelAndView.addObject("info", "0");
-            modelAndView.addObject("error", "验证成功，请<a href='/portal/toLogin'><em>登录</em></a>完善个人信息！");
-            modelAndView.setViewName("register");
-            user.setStatus(1);
-            userService.updateByPrimaryKeySelective(user);
-            Userforum userforum = new Userforum();
-            userforum.setCreatetime(new java.util.Date());
-            userforum.setName(user.getName());
-            userforum.setPic(user.getPhoto());
-            userforum.setAccount(user.getName());
-            userforum.setId(user.getUUID());
-            userforum.setPwd(user.getPassword());
-            userforum.setAuth(user.getStatus());
-            userforumService.insertSelective(userforum);
+        if (user != null ) {
+            if (user.getStatus()==0){
+                modelAndView.addObject("user", user);
+                modelAndView.addObject("info", "0");
+                modelAndView.addObject("error", "验证成功，请<a href='/portal/toLogin'><em>登录</em></a>完善个人信息！");
+                modelAndView.setViewName("register");
+                user.setStatus(1);
+                userService.updateByPrimaryKeySelective(user);
+                Userforum userforum = new Userforum();
+                userforum.setCreatetime(new java.util.Date());
+                userforum.setName(user.getName());
+                userforum.setPic(user.getPhoto());
+                userforum.setAccount(user.getName());
+                userforum.setId(user.getUUID());
+                userforum.setPwd(user.getPassword());
+                userforum.setAuth(user.getStatus());
+                userforumService.insertSelective(userforum);
+            }else{
+                modelAndView.addObject("user", user);
+                modelAndView.addObject("info", "0");
+                modelAndView.addObject("error", "已完成验证，请<a href='/portal/toLogin'><em>登录</em></a>完善个人信息！");
+                modelAndView.setViewName("register");
+
+            }
+
         } else {
             modelAndView.setViewName("register");
             modelAndView.addObject("error", "请先进行<a href='/portal/toRegister'><em>注册</em></a>！");

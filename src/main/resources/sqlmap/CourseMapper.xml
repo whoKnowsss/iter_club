@@ -12,9 +12,9 @@
         <result column="CreatedAt" property="createdAt" jdbcType="TIMESTAMP"/>
         <result column="UpdatedAt" property="updatedAt" jdbcType="TIMESTAMP"/>
         <!--<result column="TeacherId" property="teacherId" jdbcType="INTEGER"/>-->
-        <!--<result column="SchoolId" property="schoolId" jdbcType="INTEGER"/>-->
+
         <association property="teacher" column="TeacherId" select="getTeacher"/>
-        <association property="school" column="SchoolId" select="getSchool"/>
+
         <!--<result column="CategoryId" property="categoryId" jdbcType="INTEGER"/>-->
         <association property="category" column="CategoryId" select="getCategory"/>
     </resultMap>
@@ -37,37 +37,22 @@
         where ID = #{ID,jdbcType=INTEGER}
     </select>
 
-    <resultMap id="School" type="com.iter_club.portal.entity.School">
-        <id column="ID" property="ID" jdbcType="INTEGER"/>
-        <result column="UUID" property="UUID" jdbcType="INTEGER"/>
-        <result column="Name" property="name" jdbcType="VARCHAR"/>
-        <result column="Description" property="description" jdbcType="VARCHAR"/>
-        <result column="CreatedAt" property="createdAt" jdbcType="TIMESTAMP"/>
-        <result column="UpdatedAt" property="updatedAt" jdbcType="TIMESTAMP"/>
-    </resultMap>
-    <sql id="School_Column_List">
-        ID, UUID, Name, Description, CreatedAt, UpdatedAt
-    </sql>
-    <select id="getSchool" resultMap="School" parameterType="java.lang.Integer">
-        select
-        <include refid="School_Column_List"/>
-        from school
-        where ID = #{ID,jdbcType=INTEGER}
-    </select>
+
+
 
     <resultMap id="Teacher" type="com.iter_club.portal.entity.Teacher">
         <id column="ID" property="ID" jdbcType="INTEGER"/>
         <result column="UUID" property="UUID" jdbcType="INTEGER"/>
-        <!--<result column="SchoolId" property="school" jdbcType="INTEGER"/>-->
+
         <result column="Name" property="name" jdbcType="VARCHAR"/>
         <result column="Photo" property="photo" jdbcType="VARCHAR"/>
         <result column="Description" property="description" jdbcType="VARCHAR"/>
         <result column="CreatedAt" property="createdAt" jdbcType="TIMESTAMP"/>
         <result column="UpdatedAt" property="updatedAt" jdbcType="TIMESTAMP"/>
-        <association column="SchoolId" property="school"  select="getSchool"/>
+
     </resultMap>
     <sql id="Teacher_Column_List">
-        ID, UUID, SchoolId, Name, Photo, Description, CreatedAt, UpdatedAt
+        ID, UUID, Name, Photo, Description, CreatedAt, UpdatedAt
     </sql>
     <select id="getTeacher" resultMap="Teacher" parameterType="java.lang.Integer">
         select
@@ -84,7 +69,7 @@
     </select>
 
     <sql id="Base_Column_List">
-    ID, UUID, Name, TeacherId, SchoolId, Description, CategoryId, Status, Img, CreatedAt, UpdatedAt
+    ID, UUID, Name, TeacherId, Description, CategoryId, Status, Img, CreatedAt, UpdatedAt
   </sql>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
         select
@@ -152,11 +137,11 @@
   </delete>
     <insert id="insert" parameterType="com.iter_club.portal.entity.Course">
     insert into course (ID, UUID, Name,TeacherId,
-      SchoolId, Description, CategoryId,
+       Description, CategoryId,
       Status, Img, CreatedAt, UpdatedAt
       )
     values (#{ID,jdbcType=INTEGER}, #{UUID,jdbcType=VARCHAR}, #{Name,jdbcType=VARCHAR}, #{teacherId,jdbcType=INTEGER},
-      #{schoolId,jdbcType=INTEGER}, #{description,jdbcType=VARCHAR}, #{categoryId,jdbcType=INTEGER}, 
+       #{description,jdbcType=VARCHAR}, #{categoryId,jdbcType=INTEGER},
       #{status,jdbcType=INTEGER}, #{img,jdbcType=VARCHAR}, #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP}
       )
   </insert>
@@ -175,9 +160,7 @@
             <if test="teacherId != null">
                 TeacherId,
             </if>
-            <if test="schoolId != null">
-                SchoolId,
-            </if>
+
             <if test="description != null">
                 Description,
             </if>
@@ -210,9 +193,7 @@
             <if test="teacherId != null">
                 #{teacherId,jdbcType=INTEGER},
             </if>
-            <if test="schoolId != null">
-                #{schoolId,jdbcType=INTEGER},
-            </if>
+
             <if test="description != null">
                 #{description,jdbcType=VARCHAR},
             </if>
@@ -245,9 +226,7 @@
             <if test="teacherId != null">
                 TeacherId = #{teacherId,jdbcType=INTEGER},
             </if>
-            <if test="schoolId != null">
-                SchoolId = #{schoolId,jdbcType=INTEGER},
-            </if>
+
             <if test="description != null">
                 Description = #{description,jdbcType=VARCHAR},
             </if>
@@ -274,7 +253,7 @@
     set UUID = #{UUID,jdbcType=VARCHAR},
       Name = #{Name,jdbcType=VARCHAR},
       TeacherId = #{teacherId,jdbcType=INTEGER},
-      SchoolId = #{schoolId,jdbcType=INTEGER},
+
       Description = #{description,jdbcType=VARCHAR},
       CategoryId = #{categoryId,jdbcType=INTEGER},
       Status = #{status,jdbcType=INTEGER},

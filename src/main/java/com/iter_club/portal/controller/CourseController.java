@@ -185,16 +185,7 @@ public class CourseController {
 
     }
 
-    @RequestMapping("/toLearnname")
-    public ModelAndView toLearn_name(@RequestParam(value = "learnname", required = false) String learnname) {
-        ModelAndView modelAndView = new ModelAndView();
-        //System.out.print("------------"+learnname+"--------------");
-        Course course = courseService.selectByName(learnname);
-        // System.out.print("------------"+course+"--------------");
-        modelAndView.addObject("course", course);
-        modelAndView.setViewName("course-list");
-        return modelAndView;
-    }
+
 
 
     @RequestMapping("/search")

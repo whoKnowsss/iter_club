@@ -174,7 +174,7 @@
                 </li>
                 <li>
 
-                    <a href="${ctx}/portal/code/list">
+                    <a href="${ctx}/code/method=html">
                         在线实战
                     </a>
                 </li>

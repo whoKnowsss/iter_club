@@ -117,161 +117,6 @@
     </div>
 
 
-    <%--<div class="course-info-main clearfix w">--%>
-    <%--<div class="content-wrap">--%>
-    <%--<div class="content">--%>
-    <%--<!-- 课程简介 -->--%>
-    <%--<div class="course-brief">--%>
-    <%--<p class="auto-wrap">{{ course.desc }}</p>--%>
-    <%--</div>--%>
-    <%--<!-- 课程简介 end -->--%>
-    <%--<div class="mod-tab-menu ">--%>
-    <%--<ul class="course-menu clearfix">--%>
-    <%--<li><a class="ui-tabs-active active" id="learnOn" href="#"><span>章节</span></a></li>--%>
-    <%--<li><a id="commentOn" class="" href="{% url 'courses:comments' course.id %}"><span>评论</span></a>--%>
-    <%--</li>--%>
-
-    <%--</ul>--%>
-    <%--</div>--%>
-
-    <%--<!-- 课程面板 -->--%>
-
-    <%--<div class="mod-chapters">--%>
-    <%--{% for lesson in lessons %}--%>
-    <%--<div class="chapter  chapter-active">--%>
-    <%--<!-- 章节标题 -->--%>
-    <%--<h3><strong> {{ lesson.name }}</strong></h3>--%>
-    <%--<!-- 章节标题 end -->--%>
-    <%--<!-- 章节小节 -->--%>
-    <%--<ul class="video">--%>
-    <%--{% for video in lesson.get_lesson_video %}--%>
-    <%--<li data-media-id="15609">--%>
-    <%--<a href="{% url 'courses:video' video.id %}" class="J-media-item">--%>
-    <%--{{ video.name }} {{ video.learn_times |floatformat:0 }}秒--%>
-    <%--{% if request.user.is_authenticated %}--%>
-    <%--{% for progess in progesses %}--%>
-    <%--{% ifequal video progess.video %}--%>
-    <%--{% if progess.is_finish %}--%>
-    <%--<i style="float: right;margin-top: 13px;margin-right: 10px;"--%>
-    <%--class="glyphicon glyphicon-ok-circle"></i>--%>
-    <%--{% else %}--%>
-    <%--<i style="float: right;margin-top: 13px;margin-right: 10px;"--%>
-    <%--class="glyphicon glyphicon-adjust"></i>--%>
-    <%--{% endif %}--%>
-    <%--{% endifequal %}--%>
-    <%--{% endfor %}--%>
-    <%--{% endif %}--%>
-    <%--</a></li>--%>
-
-    <%--{% endfor %}--%>
-    <%--</ul>--%>
-    <%--</div>--%>
-    <%--{% endfor %}--%>
-
-
-    <%--</div>--%>
-    <%--<!-- 课程章节 end -->--%>
-    <%--</div>--%>
-    <%--<!--content end-->--%>
-    <%--<div class="aside r">--%>
-    <%--<div class="bd">--%>
-    <%--<div class="box mb40 js-usercard-box">--%>
-
-    <%--<h4><a>讲师提示</a></h4>--%>
-    <%--<div class="teacher-info">--%>
-    <%--<a href="{% url 'teachers:teacher_detail' course.teacher.id %}" target="_blank"> <img--%>
-    <%--data-userid="497216" class="js-usercard-dialog"--%>
-    <%--src="{{ MEDIA_URL }}{{ course.teacher.image }}" width="80" height="80"/> </a>--%>
-    <%--<span class="tit"> <a href="{% url 'teachers:teacher_detail' course.teacher.id %}"--%>
-    <%--target="_blank">{{ course.teacher.name }}</a><i--%>
-    <%--class="icon-imooc"></i> </span>--%>
-    <%--<span class="job">{{ course.teacher.work_position }}</span>--%>
-    <%--</div>--%>
-    <%--<div class="course-info-tip">--%>
-    <%--<dl class="first">--%>
-    <%--<dt>--%>
-    <%--课程须知--%>
-    <%--</dt>--%>
-    <%--<dd class="autowrap">--%>
-    <%--{% autoescape off %}--%>
-    <%--{{ course.youneed_konw }}--%>
-    <%--{% endautoescape %}--%>
-
-    <%--</dd>--%>
-    <%--</dl>--%>
-    <%--<dl>--%>
-    <%--<dt>--%>
-    <%--老师告诉你能学到什么？--%>
-    <%--</dt>--%>
-    <%--<dd class="autowrap">--%>
-    <%--{% autoescape off %}--%>
-    <%--{{ course.teacher_tell }}--%>
-    <%--{% endautoescape %}--%>
-    <%--</dd>--%>
-    <%--</dl>--%>
-    <%--</div>--%>
-    <%--</div>--%>
-    <%--{% if all_resources %}--%>
-    <%--<div class="box mb40">--%>
-    <%--<h4>资料下载</h4>--%>
-    <%--{# 资料下载 #}--%>
-    <%--<ul class="list-group" style="margin-top: 15px">--%>
-    <%--{% for course_resource in all_resources %}--%>
-    <%--<li class="list-group-item">--%>
-    <%--<span><i class="aui-iconfont aui-icon-file"></i>{{ course_resource.name }}</span>--%>
-    <%--<a style="float: right" href="{{ MEDIA_URL }}{{ course_resource.download }}"--%>
-    <%--class="downcode" download="{{ course_resource.name }}">下载</a>--%>
-    <%--</li>--%>
-    <%--{% endfor %}--%>
-    <%--</ul>--%>
-    <%--</div>--%>
-    <%--{% endif %}--%>
-    <%--<div class="js-recom-box">--%>
-    <%--<div class="box mb40 all-attention-box">--%>
-    <%--<h4>大家都关注</h4>--%>
-    <%--<div class="js-all-attention all-attention">--%>
-
-    <%--{% for learn_course in all_learn_course %}--%>
-
-    <%--<a href="{% url 'courses:course_detail' learn_course.id %}" target="_blank"--%>
-    <%--data-id="20"--%>
-    <%--class="orange fs16 bold">{{ learn_course.name }}</a>--%>
-    <%--{% endfor %}--%>
-
-    <%--</div>--%>
-    <%--</div>--%>
-    <%--<div class="box mb40 recom-course-list-box">--%>
-    <%--<h4>推荐课程</h4>--%>
-    <%--{% for relate_cours in relate_courses %}--%>
-    <%--<ul class="js-recom-course recom-course-list clearfix">--%>
-    <%--<li class="clearfix"><a href="{% url 'courses:course_detail' relate_cours.id %}"--%>
-    <%--class="clearfix" target="_blank">--%>
-    <%--<div class="l course-img">--%>
-    <%--<div class="cart-color purple"--%>
-    <%--style="background-image: url({{ MEDIA_URL }}{{ relate_cours.image }});">--%>
-
-    <%--</div>--%>
-    <%--</div>--%>
-    <%--<div class="l content-box">--%>
-    <%--<p class="smalle-title">{{ relate_cours.name }}</p>--%>
-
-    <%--<div class="clearfix learn-detail">--%>
-    <%--{{ relate_cours.get_is_easy_display }}--%>
-    <%--<span>&middot;</span>{{ relate_cours.students }}人在学--%>
-    <%--</div>--%>
-    <%--</div>--%>
-    <%--</a></li>--%>
-    <%--{% endfor %}--%>
-
-
-    <%--</ul>--%>
-    <%--</div>--%>
-    <%--</div>--%>
-    <%--</div>--%>
-    <%--</div>--%>
-    <%--</div>--%>
-    <%--<div class="clear"></div>--%>
-    <%--</div>--%>
 
     <div class="c-container">
         <!-- 课程详情 -->
@@ -337,48 +182,6 @@
                 <div class="clear"></div>
 
 
-                <%--<c:choose>--%>
-
-                <%--<c:when test="${course.status ==2 }">--%>
-                <%--<button class="course-abandon-btn">课程已结束</button>--%>
-                <%--</c:when>--%>
-
-                <%--<c:when test="${empty user}">--%>
-                <%--<%	session.setAttribute("before_page","course-info");%>--%>
-                <%--<form action="${ctx}/login/toLogin" method="post" name="formtologin" id="formtologin">--%>
-                <%--<input type="hidden" name="id" id="courseid" ></input>--%>
-                <%--</form>--%>
-                <%--<button  class="course-abandon-btn" onclick="toLogin(${course.ID})">参加课程</button>--%>
-                <%--</c:when>--%>
-
-                <%--<c:when test="${not empty user_course}">--%>
-                <%--<c:set var="flag" value="false" />--%>
-                <%--<c:forEach var="item" items="${user_course}">--%>
-                <%--<c:if test="${item.name == course.name}">--%>
-                <%--<c:set var="flag" value="true" />--%>
-                <%--</c:if>--%>
-                <%--</c:forEach>--%>
-                <%--<c:if test="${flag == true}">--%>
-                <%--<form action="${ctx}/course/toLearn" method="post" name="formtolearn" id="formtolearn">--%>
-                <%--<input type="hidden" name="learnid" id="learnid" ></input>--%>
-                <%--</form>--%>
-                <%--<button onclick="toLearn(${course.ID})" class="course-abandon-btn">已参加，进入学习</button>--%>
-                <%--</c:if>--%>
-
-                <%--<c:if test="${flag == false}">--%>
-                <%--<form action="${ctx}/course/toLearn" method="post" name="formtoJoin" id="formtoJion">--%>
-                <%--<input type="hidden" name="userid" id="userid" ></input>--%>
-                <%--<input type="hidden" name="joinid" id="joinid" ></input>--%>
-                <%--</form>--%>
-                <%--<button onclick="toJoin(${user.ID},${course.ID})" class="course-abandon-btn">参加课程1</button>--%>
-                <%--</c:if>--%>
-                <%--</c:when>--%>
-
-                <%--<c:otherwise >--%>
-                <%--<button class="course-abandon-btn">无其他情况</button>--%>
-                <%--</c:otherwise>--%>
-
-                <%--</c:choose>--%>
 
             </div>
             <!-- 详细信息 -->
@@ -403,7 +206,7 @@
                         <div class="teacher-img"><img src="${course.teacher.photo}"></div>
                         <ul class="f-02">
                             <li class="t-name">${course.teacher.name}</li>
-                            <li class="t-info">${course.teacher.school.name}</li>
+                            <li class="t-info">清华大学</li>
                             <li class="t-info" style="width: 150px;">${course.teacher.description}</li>
                         </ul>
                         <div class="clear"></div>
@@ -416,7 +219,7 @@
         <div class="clear"></div>
         <%--</c:forEach>--%>
         <footer>
-            <div class="container">
+            <hr> <div class="container">
                 <div class="col-sm-8 text-left">© 2018 艾特社区（ITer_Club）</div>
                 <div class="col-sm-4 text-right"><i class="fa fa-desktop" aria-hidden="true"></i>互联网虚拟学习社区</div>
             </div>

@@ -18,7 +18,7 @@
         <result column="CreatedAt" property="createdAt" jdbcType="TIMESTAMP"/>
         <result column="UpdatedAt" property="updatedAt" jdbcType="TIMESTAMP"/>
         <association property="teacher" column="TeacherId" select="getTeacher"/>
-        <association property="school" column="SchoolId" select="getSchool"/>
+
         <association property="category" column="CategoryId" select="getCategory"/>
     </resultMap>
 
@@ -40,23 +40,7 @@
         where ID = #{ID,jdbcType=INTEGER}
     </select>
 
-    <resultMap id="School" type="com.iter_club.portal.entity.School">
-        <id column="ID" property="ID" jdbcType="INTEGER"/>
-        <result column="UUID" property="UUID" jdbcType="INTEGER"/>
-        <result column="Name" property="name" jdbcType="VARCHAR"/>
-        <result column="Description" property="description" jdbcType="VARCHAR"/>
-        <result column="CreatedAt" property="createdAt" jdbcType="TIMESTAMP"/>
-        <result column="UpdatedAt" property="updatedAt" jdbcType="TIMESTAMP"/>
-    </resultMap>
-    <sql id="School_Column_List">
-        ID, UUID, Name, Description, CreatedAt, UpdatedAt
-    </sql>
-    <select id="getSchool" resultMap="School" parameterType="java.lang.Integer">
-        select
-        <include refid="School_Column_List"/>
-        from school
-        where ID = #{ID,jdbcType=INTEGER}
-    </select>
+
 
     <resultMap id="Teacher" type="com.iter_club.portal.entity.Teacher">
         <id column="ID" property="ID" jdbcType="INTEGER"/>
@@ -66,10 +50,10 @@
         <result column="Description" property="description" jdbcType="VARCHAR"/>
         <result column="CreatedAt" property="createdAt" jdbcType="TIMESTAMP"/>
         <result column="UpdatedAt" property="updatedAt" jdbcType="TIMESTAMP"/>
-        <association column="SchoolId" property="school"  select="getSchool"/>
+
     </resultMap>
     <sql id="Teacher_Column_List">
-        ID, UUID, SchoolId, Name, Photo, Description, CreatedAt, UpdatedAt
+        ID, UUID, Name, Photo, Description, CreatedAt, UpdatedAt
     </sql>
     <select id="getTeacher" resultMap="Teacher" parameterType="java.lang.Integer">
         select

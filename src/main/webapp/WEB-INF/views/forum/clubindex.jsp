@@ -117,7 +117,7 @@
                 <div class="fly-link">
                     <span>友情链接：</span>
                     <a href="${ctx}/portal/course/category_code=1/status=-1">精品课程</a>
-                    <a href="${ctx}/portal/code/list" >在线实战</a>
+                    <a href="${ctx}/code/method=html" >在线实战</a>
                 </div>
 
 

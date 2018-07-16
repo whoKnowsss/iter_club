@@ -7,7 +7,7 @@ public class Teacher {
 
     private String UUID;
 
-    private School school;
+
 
 //    public Integer getSchoolId() {
 //        return schoolId;
@@ -16,13 +16,7 @@ public class Teacher {
 //    public void setSchoolId(Integer schoolId) {
 //        this.schoolId = schoolId;
 //    }
-    public School getSchool() {
-        return school;
-    }
 
-    public void setSchool(School school) {
-        this.school = school;
-    }
 
     private String name;
 

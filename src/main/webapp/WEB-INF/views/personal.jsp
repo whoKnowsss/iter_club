@@ -104,7 +104,7 @@
 						<a href="" class="f-01 tag">大学先修课${course.ID}</a>
 					</div>
 					<div class="i-des">
-						<span><a href="" class="f-01 ">${course.school.name}</a></span>
+						<span><a href="" class="f-01 ">清华大学</a></span>
 						<span><a href="" class="f-01 ">${course.teacher.name}</a></span>
 					</div>
 					<div class="i-state">
