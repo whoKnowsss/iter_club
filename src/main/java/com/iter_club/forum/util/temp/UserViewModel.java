@@ -8,7 +8,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Created by Administrator on 2016-12-05.
+ * Created by AsherLi
  */
 public class UserViewModel {
     static public UserViewModel From(Userforum userforum){

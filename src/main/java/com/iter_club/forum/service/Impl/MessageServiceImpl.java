@@ -12,7 +12,7 @@ import java.util.Date;
 import java.util.UUID;
 
 /**
- * Created by Administrator on 2016-12-20.
+ * Created by AsherLi
  */
 @Service
 public class MessageServiceImpl implements MessageService {

@@ -3,7 +3,7 @@ package com.iter_club.forum.dao;
 import org.springframework.stereotype.Repository;
 
 /**
- * Created by Administrator on 2016-11-28.
+ * Created by AsherLi
  */
 @Repository
 public interface SysconfDao {

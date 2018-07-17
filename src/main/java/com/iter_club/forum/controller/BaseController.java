@@ -5,7 +5,7 @@ import com.iter_club.forum.util.Response;
 import com.iter_club.forum.util.Response;
 
 /**
- * Created by Administrator on 2016-11-30.
+ * Created by AsherLi
  */
 public class BaseController {
     protected  Gson gson = new Gson();

@@ -59,7 +59,7 @@
                                     <p>
                                         <span><a href="#">{{ item.userforum.name }}</a></span>
                                         <span>{{item.time}} </span>
-                                        <span>OpenAuth.Net框架综合</span>
+                                        <span>ITer_Club（艾特社区）</span>
                                         <span class="fly-list-hint">
                                             <i class="iconfont" title="回答">&#xe60c;</i> {{ item.comment }}
                                             <i class="iconfont" title="人气">&#xe60b;</i> {{ item.hits }}
@@ -137,6 +137,10 @@
             }).extend({
                 fly: 'index'
             }).use('fly');
+
+            $(function () {
+                $('.layui-fixbar').remove()
+            })
         </script>
     <%--<script>--%>
         <%--$(document).ready(function () {--%>

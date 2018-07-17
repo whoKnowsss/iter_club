@@ -20,7 +20,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
- * Created by Administrator on 2016-11-29.
+ * Created by AsherLi
  */
 @Controller
 @RequestMapping(value = "/forum/user")

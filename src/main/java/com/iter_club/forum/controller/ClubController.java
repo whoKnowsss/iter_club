@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import javax.annotation.Resource;
 
 /**
- * Created by Administrator on 2016-11-29.
+ * Created by AsherLi
  */
 @Controller
 @RequestMapping(value="/forum/club")

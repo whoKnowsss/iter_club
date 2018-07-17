@@ -1,7 +1,7 @@
 package com.iter_club.forum.service;
 
 /**
- * Created by Administrator on 2016-11-28.
+ * Created by AsherLi
  */
 public interface SysconfService {
     String getVersion();

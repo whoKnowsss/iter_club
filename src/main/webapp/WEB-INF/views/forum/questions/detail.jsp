@@ -6,7 +6,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title id="title"> {{title }} - OpenAuth.net官方社区</title>
+    <title id="title">ITer_Club（艾特社区）</title>
 
     <link rel="stylesheet" href="${ctx}/resources/layui/css/layui.css">
     <link rel="stylesheet" href="${ctx}/resources/fly/css/global.css">

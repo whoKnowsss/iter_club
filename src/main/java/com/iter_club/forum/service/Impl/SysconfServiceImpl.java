@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 
 /**
- * Created by Administrator on 2016-11-28.
+ * Created by AsherLi
  */
 @Service
 public class SysconfServiceImpl implements SysconfService {

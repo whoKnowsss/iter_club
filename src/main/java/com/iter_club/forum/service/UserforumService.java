@@ -9,7 +9,7 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 /**
- * Created by Administrator on 2016-11-28.
+ * Created by AsherLi
  */
 public interface UserforumService {
     int countByExample(UserExample example);

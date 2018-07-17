@@ -15,7 +15,7 @@ layui.define(['layer', 'form', 'upload', 'util'], function(exports) {
 
     //阻止IE7以下访问
     if (device.ie && device.ie < 8) {
-        layer.alert('如果您非得使用ie浏览OpenAuth.Net社区，那么请使用ie8+');
+        layer.alert('如果您非得使用ie浏览本社区，那么请使用ie8+');
     }
 
     layui.focusInsert = function(obj, str) {
@@ -349,10 +349,10 @@ layui.define(['layer', 'form', 'upload', 'util'], function(exports) {
 
     //右下角固定Bar
     util.fixbar({
-        bar1: true,
+        bar1: false,
         click: function(type) {
             if (type === 'bar1') {
-                layer.msg('OpenAuth.Net');
+                layer.msg('ITer_Club');
             }
         }
     });

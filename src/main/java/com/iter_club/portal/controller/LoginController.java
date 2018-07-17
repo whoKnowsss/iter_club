@@ -22,7 +22,7 @@ import java.util.UUID;
 import static com.iter_club.portal.util.SendEmail.sendRegisterMail;
 
 /**
- * Created by Administrator on 2017/7/28.
+ * Created by AsherLi
  */
 
 @Controller

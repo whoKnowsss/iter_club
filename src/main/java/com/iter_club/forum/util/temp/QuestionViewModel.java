@@ -5,7 +5,7 @@ import com.iter_club.forum.entity.Question;
 import java.util.List;
 
 /**
- * Created by Administrator on 2016-12-05.
+ * Created by AsherLi
  */
 public class QuestionViewModel extends Question {
     public UserViewModel userforum;   //发布者

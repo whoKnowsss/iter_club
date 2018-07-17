@@ -4,7 +4,6 @@ import java.io.*;
 
 /**
  * 代码编译
- * @author smallclover
  *
  */
 public class ComplierVer2 {
@@ -24,19 +23,24 @@ public class ComplierVer2 {
      */
 	public String ComplierCode(String className, String batPath, String filePath) throws IOException, InterruptedException{
 		Runtime runtime = Runtime.getRuntime();
-		
-		process = runtime.exec(batPath+"/build.bat");
-		
-		Thread.sleep(1*1000);//线程沉睡1秒，防止文件没有被运行
-		
-		//输入批处理命令
-		bw = new BufferedWriter(new OutputStreamWriter(process.getOutputStream()));
-		bw.write(filePath);
-		bw.flush();
-		bw.write(className);
-		bw.flush();
-		bw.close();
-		
+		String os = System.getProperty("os.name");
+		if(os.toLowerCase().startsWith("win")){
+			process = runtime.exec(batPath+"/build.bat");
+
+			Thread.sleep(1*1000);//线程沉睡1秒，防止文件没有被运行
+
+			//输入批处理命令
+			bw = new BufferedWriter(new OutputStreamWriter(process.getOutputStream()));
+			bw.write(filePath);
+			bw.flush();
+			bw.write(className);
+			bw.flush();
+			bw.close();
+
+		}else{
+			process = runtime.exec("sh "+batPath+"/build.sh "+filePath+" "+className);
+		}
+
         SequenceInputStream sis = new SequenceInputStream (process.getInputStream (), process.getErrorStream ());
         InputStreamReader isr = new InputStreamReader (sis, "gbk");
         BufferedReader br = new BufferedReader (isr);

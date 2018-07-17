@@ -17,7 +17,7 @@ import java.util.Random;
 import java.util.UUID;
 
 /**
- * Created by Administrator on 2016-11-30.
+ * Created by AsherLi
  */
 @Service
 public class UserforumServiceImpl implements UserforumService {

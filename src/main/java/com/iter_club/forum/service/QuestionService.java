@@ -5,7 +5,7 @@ import com.iter_club.forum.util.temp.QuestionViewModel;
 import com.iter_club.forum.entity.Question;
 
 /**
- * Created by Administrator on 2016-12-01.
+ * Created by AsherLi
  */
 public interface QuestionService {
 

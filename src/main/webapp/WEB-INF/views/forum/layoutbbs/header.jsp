@@ -140,7 +140,7 @@
 
     $(document).ready(function () {
         dropdownOpen();//调用
-        $('ul.layui-fixbar').remove()
+
     });
 
     /**

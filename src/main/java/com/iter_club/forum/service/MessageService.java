@@ -6,7 +6,7 @@ import com.iter_club.forum.entity.Message;
 import com.iter_club.forum.entity.Question;
 
 /**
- * Created by Administrator on 2016-12-20.
+ * Created by AsherLi
  */
 public interface MessageService {
     void notify(Userforum userforum, Question question);

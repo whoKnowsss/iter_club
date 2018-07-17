@@ -1,7 +1,7 @@
 package com.iter_club.forum.util;
 
 /**
- * Created by Administrator on 2016-11-30.
+ * Created by AsherLi
  */
 public class Response {
     public boolean Status;

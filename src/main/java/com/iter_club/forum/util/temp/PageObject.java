@@ -3,7 +3,7 @@ package com.iter_club.forum.util.temp;
 import java.util.List;
 
 /**
- * Created by Administrator on 2016-12-01.
+ * Created by AsherLi
  */
 public class PageObject<T> {
     private int total;    //总记录数
