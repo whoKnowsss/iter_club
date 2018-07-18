@@ -1,8 +1,6 @@
 package com.iter_club.portal.service.impl;
 
 
-
-
 import com.iter_club.portal.dao.TeacherMapper;
 import com.iter_club.portal.entity.Teacher;
 import com.iter_club.portal.service.TeacherService;
@@ -45,5 +43,9 @@ public class TeacherServicelmpl implements TeacherService {
     @Override
     public int updateByPrimaryKey(Teacher record) {
         return teacherMapper.updateByPrimaryKey(record);
+    }
+
+    public Teacher selectByUUID(String uuid) {
+        return teacherMapper.selectByUUID(uuid);
     }
 }

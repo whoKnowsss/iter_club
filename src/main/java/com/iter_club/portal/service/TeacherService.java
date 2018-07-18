@@ -18,4 +18,6 @@ public interface TeacherService {
     int updateByPrimaryKeySelective(Teacher record);
 
     int updateByPrimaryKey(Teacher record);
+
+    Teacher selectByUUID(String uuid);
 }

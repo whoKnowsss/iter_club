@@ -19,6 +19,8 @@ public interface CourseService {
 
     Course selectByName(String name);
 
+    List<Course> selectByTeacher(int uuid);
+
     List<Course> selectByCategoryId(Integer ID);
 
     List<Course> selectSelective(Course course);

@@ -13,6 +13,7 @@ public interface TeacherMapper {
     int insertSelective(Teacher record);
 
     Teacher selectByPrimaryKey(Integer ID);
+    Teacher selectByUUID(String uuid);
 
     int updateByPrimaryKeySelective(Teacher record);
 

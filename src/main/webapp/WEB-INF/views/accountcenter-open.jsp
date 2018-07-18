@@ -48,9 +48,8 @@
 
             <ul class="">
                 <li><a href="${ctx}/user/toProfile">我的设置</a></li>
-                <li class="select"><a href="${ctx}/user/tocourses/id=-1">我的课程</a></li>
-                <li ><a href="${ctx}/user/tomyopen">我要开课</a></li>
-
+                <li><a href="${ctx}/user/tocourses/id=-1">我的课程</a></li>
+                <li class="select"><a href="${ctx}/user/tomyopen">我要开课</a></li>
             </ul>
         </ul>
     </div>
@@ -60,16 +59,15 @@
         <ul id="j-mycourselist-data-con" class="mycourse_ul clearfix">
             <li>
                 <ul class="nav nav-pills" style="background: #fff;margin-bottom: 20px;">
-                    <li role="presentation" class="course-nav-item ${status eq -1 ? "active" : ""}"><a
-                            href="${ctx}/user/tocourses/id=-1"> 全部 </a></li>
-                    <li role="presentation" class="course-nav-item ${status eq 0 ? "active" : ""}"><a
-                            href="${ctx}/user/tocourses/id=0"> 即将开始 </a></li>
-                    <li role="presentation" class="course-nav-item ${status eq 1 ? "active" : ""}"><a
-                            href="${ctx}/user/tocourses/id=1"> 正在进行 </a></li>
-                    <li role="presentation" class="course-nav-item ${status eq 2 ? "active" : ""}"><a
-                            href="${ctx}/user/tocourses/id=2"> 已经结束 </a></li>
+                    <li role="presentation" class="course-nav-item active"><a
+                            href="${ctx}/user/tomyopen"> 我的列表 </a></li>
+                    <li role="presentation" class="course-nav-item "><a
+                            href="${ctx}/user/toopennew"> 新建课程 </a></li>
                 </ul>
             </li>
+            <c:if test="${user_course.size() eq 0}">
+              您还没有课程，赶紧来<a href="${ctx}/user/toopennew">开课</a> 把！！
+            </c:if>
             <c:forEach var="one" items="${user_course}" varStatus="cg">
 
             <li class="tb">
@@ -113,10 +111,13 @@
                             <div class="more_hd">
                                 <div class="more_icon j-more">
                                 </div>
-                                <div class="more_list_hd">
+                                <%--<div class="more_list_hd">--%>
                                     <div class="remove_btn" id='remove_btn' style="z-index: 4000"><a
-                                            href="${ctx}/portal/course/delete/user=${sessionScope.user.ID}/course=${one.ID}">删除课程</a>
+                                            href="${ctx}/user/course/edit/course=${one.ID}">编辑课程</a>
                                     </div>
+                                    <div class="remove_btn" id='remove_btn' style="z-index: 4000"><a
+                                            href="#">删除课程</a>
+                                    <%--</div>--%>
 <%--${one}--%>
                                 </div>
                             </div>

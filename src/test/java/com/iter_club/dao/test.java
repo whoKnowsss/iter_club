@@ -33,7 +33,7 @@ public class test {
         System.out.println(con);
         try {
             con=new String(con.getBytes("GBK"),"UTF-8");
-            con=con.replace("#####change#####","http://localhost:8080/user/yanzheng/uuid=");
+            con=con.replace("#####change#####","http://www.lixiufeng.me/user/yanzheng/uuid=");
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }

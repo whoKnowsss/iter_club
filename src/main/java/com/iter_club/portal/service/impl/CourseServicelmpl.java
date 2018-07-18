@@ -25,6 +25,9 @@ public class CourseServicelmpl implements CourseService {
 //        return courseMapper.selectByUsertocouStatus( ID, ID2);;
 //    }
 
+    public List<Course> selectByTeacher(int uuid) {
+        return courseMapper.selectByTeacher(uuid);
+    }
 
     @Override
     public List<Course> search(String name) {
@@ -90,10 +93,10 @@ public class CourseServicelmpl implements CourseService {
 
     public List<Course> selectTop(int num) {
         List<Course> one = new ArrayList<Course>();
-        for (int i=1;i<=num;i++){
+        for (int i = 1; i <= num; i++) {
             one.add(courseMapper.selectByPrimaryKey(i));
         }
-        return  one;
+        return one;
     }
 
 }

@@ -79,6 +79,11 @@
     </select>
 
 
+    <select id="selectByTeacher" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select * from course where course.TeacherId = #{id}
+    </select>
+
+
 
     <select id="selectSelective" resultMap="BaseResultMap" parameterType="com.iter_club.portal.entity.Course" >
         select
@@ -146,6 +151,9 @@
       )
   </insert>
     <insert id="insertSelective" parameterType="com.iter_club.portal.entity.Course">
+        <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="ID">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
         insert into course
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="ID != null">
@@ -157,14 +165,14 @@
             <if test="Name != null">
                 Name,
             </if>
-            <if test="teacherId != null">
+            <if test="teacher.ID != null">
                 TeacherId,
             </if>
 
             <if test="description != null">
                 Description,
             </if>
-            <if test="categoryId != null">
+            <if test="category.ID != null">
                 CategoryId,
             </if>
             <if test="status != null">
@@ -188,17 +196,17 @@
                 #{UUID,jdbcType=VARCHAR},
             </if>
             <if test="Name != null">
-                Name,
+                #{Name,jdbcType=VARCHAR},
             </if>
-            <if test="teacherId != null">
-                #{teacherId,jdbcType=INTEGER},
+            <if test="teacher.ID != null">
+                #{teacher.ID,jdbcType=INTEGER},
             </if>
 
             <if test="description != null">
                 #{description,jdbcType=VARCHAR},
             </if>
-            <if test="categoryId != null">
-                #{categoryId,jdbcType=INTEGER},
+            <if test="category.ID != null">
+                #{category.ID,jdbcType=INTEGER},
             </if>
             <if test="status != null">
                 #{status,jdbcType=INTEGER},
@@ -223,15 +231,15 @@
             <if test="Name != null">
                 Name = #{Name,jdbcType=VARCHAR},
             </if>
-            <if test="teacherId != null">
-                TeacherId = #{teacherId,jdbcType=INTEGER},
+            <if test="teacher.ID != null">
+                TeacherId = #{teacher.ID,jdbcType=INTEGER},
             </if>
 
             <if test="description != null">
                 Description = #{description,jdbcType=VARCHAR},
             </if>
-            <if test="categoryId != null">
-                CategoryId = #{categoryId,jdbcType=INTEGER},
+            <if test="category.ID != null">
+                CategoryId = #{category.ID,jdbcType=INTEGER},
             </if>
             <if test="status != null">
                 Status = #{status,jdbcType=INTEGER},

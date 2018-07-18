@@ -1,5 +1,9 @@
 package com.iter_club.dao;
+import com.iter_club.portal.dao.CourseMapper;
 import com.iter_club.portal.dao.UserMapper;
+import com.iter_club.portal.entity.Category;
+import com.iter_club.portal.entity.Course;
+import com.iter_club.portal.entity.Teacher;
 import com.iter_club.portal.entity.User;
 import org.junit.After;
 import org.junit.Before;
@@ -15,12 +19,12 @@ public class UserforumMapperTest {
 
     private ApplicationContext applicationContext;
     @Autowired
-    private UserMapper userMapper;
+    private CourseMapper courseMapper;
 
     @Before
     public void setUp() throws Exception {
         applicationContext = new ClassPathXmlApplicationContext("classpath:spring/applicationContext.xml");//加载spring配置文件
-        userMapper = applicationContext.getBean(UserMapper.class);//在这里导入要测试的
+        courseMapper = applicationContext.getBean(CourseMapper.class);//在这里导入要测试的
     }
 
     @After
@@ -30,11 +34,16 @@ public class UserforumMapperTest {
 
     @Test
     public void insert() throws Exception {
-        User user = new User();
-        user.setUUID("5555");
-        user.setPassword("dddd");
-        user.setName("九九");
-        int result = userMapper.insertSelective(user);
+        Course course=new Course();
+        course.setStatus(2);
+        Teacher teacher=new Teacher();
+        teacher.setID(2);
+        course.setTeacher(teacher);
+        Category category=new Category();
+        category.setID(5);
+        course.setCategory(category);
+        int result = courseMapper.insertSelective(course);
+        System.out.println(course.getID());
         System.out.println(result);
         assert (result == 1);
 

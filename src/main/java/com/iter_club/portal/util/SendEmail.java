@@ -98,18 +98,22 @@ public class SendEmail {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        String con=buff.toString();
+        String con = buff.toString();
         System.out.println(con);
         try {
-            con=new String(con.getBytes("GBK"),"UTF-8");
-            con=con.replace("#####change#####","http://www.lixiufeng.me/user/yanzheng/uuid="+code);
+            con = new String(con.getBytes("GBK"), "UTF-8");
+            String os = System.getProperty("os.name");
+            if (os.toLowerCase().startsWith("win")) {
+                con = con.replace("#####change#####", "http://localhost:8080/user/yanzheng/uuid=" + code);
+            } else {
+                con = con.replace("#####change#####", "http://www.lixiufeng.me/user/yanzheng/uuid=" + code);
+            }
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-        send(toEmail, title,con );
+        send(toEmail, title, con);
 
     }
-
 
 
 }

@@ -29,6 +29,7 @@
         <ul class="">
             <li class="select"><a href="${ctx}/user/toProfile">我的设置</a></li>
             <li><a href="${ctx}/user/tocourses/id=-1">我的课程</a></li>
+            <li><a href="${ctx}/user/tomyopen">我要开课</a></li>
 
         </ul>
     </div>
@@ -183,7 +184,7 @@
             </div>
             <input type="submit" id="nickname_btn" value="确定修改" class="input_submit btn_hover"/>
 
-            <div id="nickname_fall" class="login_fall" style="display: none;">填写合法昵称</div>
+            <div id="nickname_fall" class="login_fall" style="display: none;">填写合法数据</div>
             <button type="button" class="close close_btn" data-dismiss="modal" aria-label="Close"><span
                     aria-hidden="true">&times;</span></button>
         </form>

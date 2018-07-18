@@ -1,24 +1,20 @@
 package com.iter_club.portal.controller;
 
-import com.iter_club.portal.entity.Category;
-import com.iter_club.portal.entity.Course;
-import com.iter_club.portal.entity.User;
-import com.iter_club.portal.entity.Usertocou;
-import com.iter_club.portal.service.CategoryService;
-import com.iter_club.portal.service.CourseService;
-import com.iter_club.portal.service.UserService;
-import com.iter_club.portal.service.UsertocouService;
+import com.iter_club.portal.entity.*;
+import com.iter_club.portal.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -37,6 +33,8 @@ public class CourseController {
     @Autowired
     private UserService userService;
     @Autowired
+    private TeacherService teacherService;
+    @Autowired
     UserController userController;
 
     @RequestMapping("/deleteByPrimaryKey")
@@ -53,11 +51,18 @@ public class CourseController {
         return modelAndView;
     }
 
-    @RequestMapping("/insertSelective")
-    public ModelAndView insertSelective(Course record) {
+    @RequestMapping(value = "/insertSelective",method = RequestMethod.POST)
+    public String insertSelective(Course record,Model model,HttpServletRequest request) {
+        record.setCreatedAt(new Date());
+        HttpSession session=request.getSession();
+        User user= (User) session.getAttribute("user");
+        Category category=categoryService.selectByPrimaryKey(Integer.parseInt(request.getParameter("categorys")));
+        record.setCategory(category);
+        Teacher teacher=teacherService.selectByUUID(user.getUUID());
+        record.setTeacher(teacher);
+        record.setUpdatedAt(new Date());
         courseService.insertSelective(record);
-        ModelAndView modelAndView = new ModelAndView();
-        return modelAndView;
+        return this.selectCourseOne(model,record.getID(),request);
     }
 
     @RequestMapping("/select/id={id}")

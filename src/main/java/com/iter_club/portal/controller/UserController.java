@@ -2,21 +2,17 @@ package com.iter_club.portal.controller;
 
 import com.iter_club.forum.entity.Userforum;
 import com.iter_club.forum.service.UserforumService;
+import com.iter_club.portal.entity.Category;
 import com.iter_club.portal.entity.Course;
+import com.iter_club.portal.entity.Teacher;
 import com.iter_club.portal.entity.User;
-import com.iter_club.portal.service.CourseService;
-import com.iter_club.portal.service.UserService;
-import com.iter_club.portal.service.UsertocouService;
+import com.iter_club.portal.service.*;
 
-import com.iter_club.portal.util.Encryption;
-import com.sun.org.apache.xpath.internal.operations.Mod;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -24,11 +20,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.UnsupportedEncodingException;
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
-import java.util.UUID;
-
-import static com.iter_club.portal.util.SendEmail.sendRegisterMail;
 
 /**
  * Description
@@ -48,6 +41,13 @@ public class UserController {
     private CourseService courseService;
     @Autowired
     UserforumService userforumService;
+    @Autowired
+    TeacherService teacherService;
+    @Autowired
+    MainController mainController;
+
+    @Autowired
+    CategoryService categoryService;
 
     @RequestMapping("toPersonal")
     public ModelAndView toPersonal(HttpSession session) {
@@ -125,6 +125,11 @@ public class UserController {
         Userforum userforum = userforumService.selectByPrimaryKey(user.getUUID());
         userforum.setPic(user.getPhoto());
         userforumService.updateByPrimaryKeySelective(userforum);
+        Teacher teacher = teacherService.selectByUUID(user.getUUID());
+        if (teacher != null) {
+            teacher.setPhoto(user.getPhoto());
+            teacherService.updateByPrimaryKeySelective(teacher);
+        }
         session.setAttribute("userforum", userforum);
         return this.toProfile(session);
     }
@@ -149,6 +154,12 @@ public class UserController {
                 userforum.setAccount(user.getName());
                 userforumService.updateByPrimaryKeySelective(userforum);
                 session.setAttribute("userforum", userforum);
+
+                Teacher teacher = teacherService.selectByUUID(user.getUUID());
+                if (teacher != null) {
+                    teacher.setName(user.getName());
+                    teacherService.updateByPrimaryKeySelective(teacher);
+                }
             }
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
@@ -164,8 +175,8 @@ public class UserController {
     public ModelAndView register(HttpSession session, @PathVariable("code") String code) {
         ModelAndView modelAndView = new ModelAndView();
         User user = userService.selectByUUID(code);
-        if (user != null ) {
-            if (user.getStatus()==0){
+        if (user != null) {
+            if (user.getStatus() == 0) {
                 modelAndView.addObject("user", user);
                 modelAndView.addObject("info", "0");
                 modelAndView.addObject("error", "验证成功，请<a href='/portal/toLogin'><em>登录</em></a>完善个人信息！");
@@ -181,7 +192,16 @@ public class UserController {
                 userforum.setPwd(user.getPassword());
                 userforum.setAuth(user.getStatus());
                 userforumService.insertSelective(userforum);
-            }else{
+                Teacher teacher = new Teacher();
+                teacher.setUUID(user.getUUID());
+                teacher.setCreatedAt(new java.util.Date());
+                teacher.setName(user.getName());
+                teacher.setPhoto(user.getPhoto());
+                teacher.setDescription("这位老师很懒，什么都没留下~~");
+                teacherService.insertSelective(teacher);
+
+
+            } else {
                 modelAndView.addObject("user", user);
                 modelAndView.addObject("info", "0");
                 modelAndView.addObject("error", "已完成验证，请<a href='/portal/toLogin'><em>登录</em></a>完善个人信息！");
@@ -210,6 +230,146 @@ public class UserController {
         modelAndView.setViewName("accountcenter-coures");
         return modelAndView;
     }
+
+    @RequestMapping(value = "/tomyopen", method = RequestMethod.GET)
+    public String tomyopen(HttpServletRequest request, HttpSession session, Model model) {
+        ModelAndView modelAndView = new ModelAndView();
+        User user = (User) session.getAttribute("user");
+        if (user != null) {
+            Teacher teacher = teacherService.selectByUUID(user.getUUID());
+            if (teacher != null) {
+                List user_course = courseService.selectByTeacher(teacher.getID());
+                model.addAttribute("user_course", user_course);
+            }
+            return "accountcenter-open";
+        } else {
+            return mainController.index(request, session);
+        }
+
+    }
+
+    @RequestMapping(value = "/toopennew", method = RequestMethod.GET)
+    public String gotonewpage(HttpServletRequest request, HttpSession session, Model model) {
+        User user = (User) session.getAttribute("user");
+        if (user != null) {
+            Teacher teacher = teacherService.selectByUUID(user.getUUID());
+            model.addAttribute("user", user);
+            model.addAttribute("teacher", teacher);
+            model.addAttribute("type", "1");
+            List<Category> categories = categoryService.selectAll();
+            model.addAttribute("categorys", categories);
+            return "accountcenter-new-course";
+        } else {
+            return mainController.index(request, session);
+        }
+    }
+
+
+    //进入编辑单个课程的界面
+    @RequestMapping(value = "/course/{type}/course={id}", method = RequestMethod.GET)
+    public String toeditmycourse(HttpServletRequest request, @PathVariable("type") String type, @PathVariable("id") String id, HttpSession session, Model model) {
+        User user = (User) session.getAttribute("user");
+        if (user != null) {
+            Teacher teacher = teacherService.selectByUUID(user.getUUID());
+            Course course = courseService.selectByPrimaryKey(Integer.parseInt(id));
+            if (teacher.getID().equals(course.getTeacher().getID())) {
+                if (type.equals("edit")) {
+                    model.addAttribute("user", user);
+                    model.addAttribute("teacher", teacher);
+                    model.addAttribute("course", course);
+                    model.addAttribute("type", "0");   //编辑
+                    List<Category> categories = categoryService.selectAll();
+                    model.addAttribute("categorys", categories);
+                }
+                return "accountcenter-edit";
+            } else
+                return mainController.index(request, session);
+        } else {
+            return mainController.index(request, session);
+        }
+    }
+
+
+
+    //我的新开课程的编辑
+    @RequestMapping(value = "/course/change/type={name}/course={id}", method = RequestMethod.POST)
+    public String toeditmycourseNew(HttpServletRequest request, @PathVariable("name") String name, @PathVariable("id") String id, HttpSession session, Model model) {
+        User user = (User) session.getAttribute("user");
+        if (user != null) {
+            Teacher teacher = teacherService.selectByUUID(user.getUUID());
+            Course course = courseService.selectByPrimaryKey(Integer.parseInt(id));
+            if (teacher.getID().equals(course.getTeacher().getID())) {
+                if (name.equals("name")) {
+                    course.setName(request.getParameter("name"));
+                } else if (name.equals("description")) {
+                    course.setDescription(request.getParameter("description"));
+                } else if (name.equals("category")) {
+                    Category category = categoryService.selectByPrimaryKey(Integer.parseInt(request.getParameter("category")));
+                    course.setCategory(category);
+                } else if (name.equals("status")) {
+                    course.setStatus(Integer.parseInt(request.getParameter("status")));
+                }else if (name.equals("image")) {
+                    course.setImg(request.getParameter("image"));
+                }
+                course.setUpdatedAt(new Date());
+                courseService.updateByPrimaryKeySelective(course);
+                return this.toeditmycourse(request, "edit", course.getID().toString(), session, model);
+            } else
+                return mainController.index(request, session);
+        } else {
+            return mainController.index(request, session);
+        }
+    }
+
+    //我的新开课程的缩略图的编辑
+    @RequestMapping(value = "/changephotonew")
+    @ResponseBody
+    public JSONObject uploadWJnw(HttpServletRequest request,
+                                 @RequestParam(value = "file", required = false) MultipartFile file) {
+       JSONObject jsonObject=new JSONObject();
+       String filena=request.getParameter("filename");
+        //如果用的是Tomcat服务器，则文件会上传到\\%TOMCAT_HOME%\\webapps\\YourWebProject\\upload\\文件夹中
+        //获得文件上传目标路径
+        try {
+            if (file == null) {
+                System.out.println("后台空");
+                jsonObject.put("status","0");
+                jsonObject.put("info","后台空");
+                return jsonObject;
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        String path = request.getSession().getServletContext().getRealPath("upload");
+        //System.out.print("路径"+path);
+//        String fileName = new Date().getTime()+filename.substring(filename.lastIndexOf('.'));//设置文件名
+        String fileName = new Date().getTime()+filena.substring(filena.lastIndexOf('.'));//设置文件名
+        System.out.println(path);
+        File targetFile = new File(path, fileName);
+        if (!targetFile.exists()) {
+            targetFile.mkdirs();
+        }
+        //保存
+        try {
+            file.transferTo(targetFile);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        String url = request.getRequestURL().toString();
+        System.out.println("url" + url.substring(0, url.indexOf("/", url.indexOf("/") + 1)));
+        System.out.print("request.getContextPath() :" + request.getContextPath() + "\n"
+                + "request.getRequestURL()" + request.getRequestURL()
+        );
+
+        url = request.getContextPath() + "/upload/" + fileName;
+        System.out.println("url:" + url + "\n");
+        jsonObject.put("status","1");
+        jsonObject.put("info","成功上传图片");
+        jsonObject.put("url",url);
+        return jsonObject;
+    }
+
 
     @RequestMapping("/selectByStatus")
     public ModelAndView selectByStatus(@RequestParam(value = "id", required = false) String id, HttpSession session) {

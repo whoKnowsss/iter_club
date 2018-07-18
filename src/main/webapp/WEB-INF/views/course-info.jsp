@@ -203,7 +203,7 @@
                 </div>
                 <dl class="right-body">
                     <dd class="teacher-info-box">
-                        <div class="teacher-img"><img src="${course.teacher.photo}"></div>
+                        <div class="teacher-img"><img style=" width: 70px;height: 70px;" src="${course.teacher.photo}"></div>
                         <ul class="f-02">
                             <li class="t-name">${course.teacher.name}</li>
                             <li class="t-info">清华大学</li>

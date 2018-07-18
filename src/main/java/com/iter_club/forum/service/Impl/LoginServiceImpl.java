@@ -19,14 +19,15 @@ import javax.servlet.http.HttpSession;
 public class LoginServiceImpl implements LoginService {
 
     @Autowired
-    HttpServletRequest request;
+//    HttpServletRequest request;
 
     @Resource
     UserforumService service;
 
     public Userforum get() {
-        HttpSession session = request.getSession();
-        Userforum userforum = (Userforum) session.getAttribute("userforum");
-        return userforum;
+//        HttpSession session = request.getSession();
+//        Userforum userforum = (Userforum) session.getAttribute("userforum");
+//        return userforum;
+        return null;
     }
 }

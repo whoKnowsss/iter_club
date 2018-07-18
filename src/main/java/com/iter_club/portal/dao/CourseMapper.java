@@ -16,6 +16,8 @@ public interface CourseMapper {
 
     Course selectByPrimaryKey(Integer ID);
 
+    List<Course> selectByTeacher(int id);
+
     List<Course> selectByCategoryId(Integer ID);
 
     List<Course> selectByStatus(Integer ID);
