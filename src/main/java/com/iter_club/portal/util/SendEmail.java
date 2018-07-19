@@ -28,6 +28,15 @@ public class SendEmail {
 //    public static final String FROM = "moocclub@163.com";//发件人的email
 //    public static final String PWD = "moocMOOC123";//发件人密码
 
+
+
+//    public static final String HOST = "smtp.qq.com";
+//    public static final String PROTOCOL = "smtp";
+//    public static final int PORT = 25;
+//    public static final String FROM = "1165527916@qq.com";//发件人的email
+//    public static final String PWD = "cdquumyqhltafdhb";//发件人密码
+
+
     /**
      * 获取Session
      *
@@ -115,6 +124,9 @@ public class SendEmail {
 
     }
 
+    public static void main(String[] args) {
+        send("1214276066@qq.com","ll","ss");
+    }
 
 }
 
